@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vinayaka S — AI/ML Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #0f1f45;
+    --navy2: #1B3A6B;
+    --blue: #2563EB;
+    --blue-light: #dbeafe;
+    --accent: #38bdf8;
+    --bg: #f8faff;
+    --card: #ffffff;
+    --text: #0f172a;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --tag-bg: #eff6ff;
+    --tag-text: #1d4ed8;
+    --green: #10b981;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(248,250,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw; height: 60px;
+  }
+  .nav-logo {
+    font-weight: 700; font-size: 1.1rem; color: var(--navy);
+    letter-spacing: -0.5px;
+  }
+  .nav-logo span { color: var(--blue); }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    text-decoration: none; color: var(--muted); font-size: 0.9rem;
+    font-weight: 500; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--blue); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 80px 5vw 60px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(37,99,235,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-content { max-width: 640px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--blue-light); color: var(--blue);
+    border: 1px solid #bfdbfe; border-radius: 100px;
+    padding: 4px 14px; font-size: 0.8rem; font-weight: 600;
+    margin-bottom: 1.5rem; letter-spacing: 0.3px;
+  }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  h1 {
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 700; line-height: 1.1;
+    letter-spacing: -1.5px; color: var(--navy);
+    margin-bottom: 1rem;
+  }
+  h1 span { color: var(--blue); }
+  .hero-sub {
+    font-size: 1.1rem; color: var(--muted); margin-bottom: 2rem;
+    font-weight: 400; max-width: 500px;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--blue); color: #fff;
+    padding: 12px 28px; border-radius: 10px;
+    text-decoration: none; font-weight: 600; font-size: 0.95rem;
+    border: 2px solid var(--blue); transition: all 0.2s;
+  }
+  .btn-primary:hover { background: #1d4ed8; border-color: #1d4ed8; transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent; color: var(--navy);
+    padding: 12px 28px; border-radius: 10px;
+    text-decoration: none; font-weight: 600; font-size: 0.95rem;
+    border: 2px solid var(--border); transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-1px); }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 3rem;
+    padding-top: 2rem; border-top: 1px solid var(--border);
+  }
+  .stat-val { font-size: 1.6rem; font-weight: 700; color: var(--navy); }
+  .stat-lbl { font-size: 0.8rem; color: var(--muted); font-weight: 500; }
+
+  /* SECTION COMMON */
+  section { padding: 80px 5vw; }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem; color: var(--blue); font-weight: 500;
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 700; color: var(--navy);
+    letter-spacing: -0.8px; margin-bottom: 0.5rem;
+  }
+  .section-desc { color: var(--muted); font-size: 1rem; margin-bottom: 3rem; max-width: 560px; }
+
+  /* ABOUT */
+  #about { background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 0.97rem; }
+  .about-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.5rem; }
+  .tag {
+    background: var(--tag-bg); color: var(--tag-text);
+    border: 1px solid #bfdbfe; border-radius: 6px;
+    padding: 4px 12px; font-size: 0.8rem; font-weight: 600;
+  }
+  .about-cards { display: flex; flex-direction: column; gap: 1rem; }
+  .info-card {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1rem 1.25rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .info-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--blue-light); display: flex; align-items: center;
+    justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+  }
+  .info-title { font-weight: 600; font-size: 0.9rem; color: var(--navy); }
+  .info-sub { font-size: 0.8rem; color: var(--muted); }
+
+  /* PROJECTS */
+  #projects { background: var(--bg); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 1.5rem; }
+  .project-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .project-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--accent));
+  }
+  .project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(37,99,235,0.12); }
+  .proj-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 0.75rem; }
+  .proj-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: var(--blue-light); display: flex; align-items: center;
+    justify-content: center; font-size: 1.4rem;
+  }
+  .proj-badge {
+    font-size: 0.72rem; font-weight: 600; padding: 3px 10px;
+    border-radius: 100px;
+  }
+  .badge-ml { background: #fef3c7; color: #92400e; }
+  .badge-cv { background: #dcfce7; color: #166534; }
+  .badge-embedded { background: #fce7f3; color: #9d174d; }
+  .badge-bci { background: #ede9fe; color: #4c1d95; }
+  .proj-title { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+  .proj-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+  .proj-metric {
+    display: inline-block;
+    background: var(--blue-light); color: var(--blue);
+    border-radius: 6px; padding: 3px 10px;
+    font-size: 0.78rem; font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 1rem;
+  }
+  .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .proj-tag {
+    font-size: 0.74rem; font-weight: 500;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 5px; padding: 2px 8px; color: var(--muted);
+  }
+
+  /* SKILLS */
+  #skills { background: var(--navy); color: #fff; }
+  #skills h2 { color: #fff; }
+  #skills .section-label { color: var(--accent); }
+  #skills .section-desc { color: rgba(255,255,255,0.55); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+  .skill-group {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px; padding: 1.5rem;
+  }
+  .skill-group-title {
+    font-size: 0.78rem; font-weight: 600; color: var(--accent);
+    letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .skill-item {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+  .skill-name { font-size: 0.88rem; color: rgba(255,255,255,0.85); font-weight: 500; }
+  .skill-bar { width: 80px; height: 4px; background: rgba(255,255,255,0.12); border-radius: 4px; overflow: hidden; }
+  .skill-fill { height: 100%; background: linear-gradient(90deg, var(--blue), var(--accent)); border-radius: 4px; }
+
+  /* EXPERIENCE */
+  #experience { background: var(--card); border-top: 1px solid var(--border); }
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px;
+    width: 2px; background: var(--border);
+  }
+  .timeline-item { position: relative; margin-bottom: 2.5rem; }
+  .timeline-dot {
+    position: absolute; left: -2rem; top: 6px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--blue); border: 3px solid var(--card);
+    box-shadow: 0 0 0 2px var(--blue);
+  }
+  .tl-header { display: flex; align-items: flex-start; gap: 1rem; justify-content: space-between; flex-wrap: wrap; }
+  .tl-title { font-weight: 700; color: var(--navy); font-size: 1rem; }
+  .tl-company { font-size: 0.85rem; color: var(--blue); font-weight: 600; }
+  .tl-date {
+    font-size: 0.78rem; color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 6px; padding: 3px 10px; white-space: nowrap;
+  }
+  .tl-bullets { margin-top: 0.75rem; padding-left: 1.2rem; }
+  .tl-bullets li { font-size: 0.88rem; color: var(--muted); margin-bottom: 0.4rem; }
+
+  /* ACHIEVEMENTS */
+  #achievements { background: var(--bg); }
+  .ach-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+  .ach-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.25rem;
+    display: flex; gap: 1rem; align-items: flex-start;
+    transition: transform 0.2s;
+  }
+  .ach-card:hover { transform: translateY(-2px); }
+  .ach-icon {
+    font-size: 1.5rem; flex-shrink: 0;
+    width: 44px; height: 44px; border-radius: 10px;
+    background: var(--blue-light); display: flex; align-items: center; justify-content: center;
+  }
+  .ach-title { font-weight: 700; font-size: 0.9rem; color: var(--navy); margin-bottom: 0.25rem; }
+  .ach-sub { font-size: 0.8rem; color: var(--muted); }
+
+  /* CONTACT */
+  #contact {
+    background: linear-gradient(135deg, var(--navy) 0%, #1e3a8a 100%);
+    text-align: center; color: #fff;
+  }
+  #contact h2 { color: #fff; }
+  #contact .section-label { color: var(--accent); }
+  .contact-sub { color: rgba(255,255,255,0.6); margin-bottom: 2.5rem; font-size: 1rem; }
+  .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .contact-btn {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.1); color: #fff;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px; padding: 12px 22px;
+    text-decoration: none; font-weight: 600; font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+  .contact-btn:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    background: #070f1f; color: rgba(255,255,255,0.4);
+    text-align: center; padding: 1.5rem;
+    font-size: 0.8rem;
+  }
+
+  /* ANIMATIONS */
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media(max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-stats { gap: 1.5rem; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">VS<span>.</span></div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content fade-up">
+    <div class="hero-badge"><div class="dot"></div> Open to Opportunities</div>
+    <h1>Vinayaka <span>S</span></h1>
+    <p class="hero-sub">AI/ML Engineer building intelligent systems for computer vision, embedded AI, and signal processing — targeting ISRO, Indian Army tech, and Google.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="mailto:Vinayakas307@gmail.com" class="btn-outline">Get in Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-val">96.5%</div><div class="stat-lbl">YOLOv8 Accuracy</div></div>
+      <div><div class="stat-val">5+</div><div class="stat-lbl">AI Projects</div></div>
+      <div><div class="stat-val">2</div><div class="stat-lbl">Industry Internships</div></div>
+      <div><div class="stat-val">Top 200</div><div class="stat-lbl">RBIH Ideathon</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text fade-up">
+      <div class="section-label">About Me</div>
+      <h2>Building AI for<br/>National Impact</h2>
+      <p style="margin-top:1rem;">I'm a final-year B.E. (Hons) AI/ML student at Global Academy of Technology, Bengaluru. My work spans computer vision, EEG-based brain-computer interfaces, and embedded AI systems.</p>
+      <p>I've interned at Infosys Springboard and Pantech Solutions, and participated in national-level competitions including the ISRO Bharatiya Antariksh Hackathon and the Tata Crucible Campus Quiz.</p>
+      <p>My goal is to build AI solutions that matter — for defence technology, space research, and large-scale engineering challenges facing India.</p>
+      <div class="about-tags">
+        <span class="tag">Computer Vision</span>
+        <span class="tag">PyTorch</span>
+        <span class="tag">YOLOv8</span>
+        <span class="tag">EEG / BCI</span>
+        <span class="tag">Embedded AI</span>
+        <span class="tag">ESP32</span>
+        <span class="tag">LangChain</span>
+      </div>
+    </div>
+    <div class="about-cards fade-up">
+      <div class="info-card">
+        <div class="info-icon">🎓</div>
+        <div>
+          <div class="info-title">Global Academy of Technology</div>
+          <div class="info-sub">B.E. (Hons) AIML · VTU · 2023–2027</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">📍</div>
+        <div>
+          <div class="info-title">Bengaluru, Karnataka</div>
+          <div class="info-sub">Open to remote & relocation</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">🚀</div>
+        <div>
+          <div class="info-title">Target Roles</div>
+          <div class="info-sub">ISRO · Indian Army Tech · Google</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">💻</div>
+        <div>
+          <div class="info-title">github.com/Vinayakashiva</div>
+          <div class="info-sub">Python · PyTorch · OpenCV · ESP32</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Featured Work</div>
+  <h2>Technical Projects</h2>
+  <p class="section-desc">Real projects across computer vision, signal processing, embedded systems, and wireless communication.</p>
+
+  <div class="projects-grid">
+
+    <div class="project-card fade-up">
+      <div class="proj-header">
+        <div class="proj-icon">🧠</div>
+        <span class="proj-badge badge-bci">BCI / Signal</span>
+      </div>
+      <div class="proj-title">EEG Brain-Computer Interface</div>
+      <div class="proj-desc">Classified imagined speech (Bilabial vs. Non-Bilabial) from 64-channel EEG using CSP spatial filtering and LinearSVC across 15 subjects.</div>
+      <div class="proj-metric">61.6% balanced accuracy · p &lt; 0.0001</div>
+      <div class="proj-tags">
+        <span class="proj-tag">Python</span><span class="proj-tag">CSP</span><span class="proj-tag">LinearSVC</span><span class="proj-tag">EEG</span><span class="proj-tag">Signal Processing</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <div class="proj-header">
+        <div class="proj-icon">🔍</div>
+        <span class="proj-badge badge-cv">Computer Vision</span>
+      </div>
+      <div class="proj-title">PCB Defect Detection (YOLOv8)</div>
+      <div class="proj-desc">End-to-end YOLOv8 pipeline for industrial PCB quality inspection with real-time Streamlit dashboard for production monitoring.</div>
+      <div class="proj-metric">96.5% accuracy · 10,000+ images</div>
+      <div class="proj-tags">
+        <span class="proj-tag">YOLOv8</span><span class="proj-tag">OpenCV</span><span class="proj-tag">Streamlit</span><span class="proj-tag">PyTorch</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <div class="proj-header">
+        <div class="proj-icon">📡</div>
+        <span class="proj-badge badge-embedded">Embedded / IoT</span>
+      </div>
+      <div class="proj-title">V2V Communication System</div>
+      <div class="proj-desc">Wireless vehicle-to-vehicle collision avoidance framework using Python and ESP32/NRF24L01 for real-time safety alerts between autonomous nodes.</div>
+      <div class="proj-metric">Real-time · Sub-50ms latency</div>
+      <div class="proj-tags">
+        <span class="proj-tag">Python</span><span class="proj-tag">ESP32</span><span class="proj-tag">NRF24L01</span><span class="proj-tag">Wireless</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <div class="proj-header">
+        <div class="proj-icon">📐</div>
+        <span class="proj-badge badge-cv">Computer Vision</span>
+      </div>
+      <div class="proj-title">3D Body Measurement System</div>
+      <div class="proj-desc">CNN-based app estimating precise human body measurements from single 2D images using pose estimation preprocessing for virtual try-on retail.</div>
+      <div class="proj-metric">Single-image 3D estimation</div>
+      <div class="proj-tags">
+        <span class="proj-tag">CNN</span><span class="proj-tag">Pose Estimation</span><span class="proj-tag">TensorFlow</span><span class="proj-tag">OpenCV</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <div class="proj-header">
+        <div class="proj-icon">🤖</div>
+        <span class="proj-badge badge-embedded">Embedded AI</span>
+      </div>
+      <div class="proj-title">AI Mini Robot</div>
+      <div class="proj-desc">Autonomous Python-powered robot with interactive voice recognition and IR sensors — bridging hardware and AI for real-time edge inference.</div>
+      <div class="proj-metric">Edge AI · Voice-controlled</div>
+      <div class="proj-tags">
+        <span class="proj-tag">Python</span><span class="proj-tag">Voice Recognition</span><span class="proj-tag">IR Sensors</span><span class="proj-tag">Edge AI</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Technical Skills</div>
+  <h2>What I Work With</h2>
+  <p class="section-desc">Tools and technologies I use to build production-grade AI systems.</p>
+
+  <div class="skills-grid">
+    <div class="skill-group fade-up">
+      <div class="skill-group-title">Languages</div>
+      <div class="skill-item"><span class="skill-name">Python</span><div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">JavaScript</span><div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Java</span><div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">SQL</span><div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div></div>
+    </div>
+    <div class="skill-group fade-up">
+      <div class="skill-group-title">ML / DL</div>
+      <div class="skill-item"><span class="skill-name">PyTorch</span><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">YOLOv8</span><div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">TensorFlow</span><div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">scikit-learn</span><div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div></div>
+    </div>
+    <div class="skill-group fade-up">
+      <div class="skill-group-title">Tools & Frameworks</div>
+      <div class="skill-item"><span class="skill-name">OpenCV</span><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Streamlit</span><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">FastAPI/Flask</span><div class="skill-bar"><div class="skill-fill" style="width:72%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Git</span><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+    </div>
+    <div class="skill-group fade-up">
+      <div class="skill-group-title">Embedded & Hardware</div>
+      <div class="skill-item"><span class="skill-name">ESP32</span><div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">NRF24L01</span><div class="skill-bar"><div class="skill-fill" style="width:72%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">Edge AI</span><div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div></div>
+      <div class="skill-item"><span class="skill-name">EEG / CSP</span><div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Career</div>
+  <h2>Experience</h2>
+  <p class="section-desc">Hands-on internships building real production-grade AI systems.</p>
+
+  <div class="timeline">
+    <div class="timeline-item fade-up">
+      <div class="timeline-dot"></div>
+      <div class="tl-header">
+        <div>
+          <div class="tl-title">AI/ML Intern</div>
+          <div class="tl-company">Infosys Springboard</div>
+        </div>
+        <div class="tl-date">Nov 2025 – Jan 2026</div>
+      </div>
+      <ul class="tl-bullets">
+        <li>Built hybrid YOLOv8 pipeline for PCB defect detection — 96.5% accuracy on 10,000+ image dataset.</li>
+        <li>Deployed real-time Streamlit diagnostic dashboard, reducing manual inspection time by ~40%.</li>
+        <li>Optimized inference using model quantization and preprocessing pipelines for edge performance.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item fade-up">
+      <div class="timeline-dot"></div>
+      <div class="tl-header">
+        <div>
+          <div class="tl-title">AI/ML Intern</div>
+          <div class="tl-company">Pantech Solutions</div>
+        </div>
+        <div class="tl-date">May 2023 – Jul 2023</div>
+      </div>
+      <ul class="tl-bullets">
+        <li>Developed supervised ML models on real-world datasets; improved F1-score by 12% via feature engineering.</li>
+        <li>Strengthened skills in SDLC, collaborative Git workflows, and debugging production Python code.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item fade-up">
+      <div class="timeline-dot" style="background:#10b981; box-shadow:0 0 0 2px #10b981;"></div>
+      <div class="tl-header">
+        <div>
+          <div class="tl-title">B.E. (Hons) — AI & Machine Learning</div>
+          <div class="tl-company">Global Academy of Technology, VTU</div>
+        </div>
+        <div class="tl-date">Jul 2023 – May 2027</div>
+      </div>
+      <ul class="tl-bullets">
+        <li>Relevant coursework: Deep Learning, Computer Vision, NLP, Signal Processing, Embedded Systems.</li>
+        <li>Top 200 / 7,000+ — RBIH Financial Literacy Ideathon.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-label">Recognition</div>
+  <h2>Achievements</h2>
+  <p class="section-desc">National competitions, hackathons, and recognitions.</p>
+
+  <div class="ach-grid">
+    <div class="ach-card fade-up">
+      <div class="ach-icon">🛸</div>
+      <div>
+        <div class="ach-title">ISRO Bharatiya Antariksh Hackathon 2025</div>
+        <div class="ach-sub">National participant — submitted space-tech innovation solution</div>
+      </div>
+    </div>
+    <div class="ach-card fade-up">
+      <div class="ach-icon">🏆</div>
+      <div>
+        <div class="ach-title">Tata Crucible Campus Quiz 2025</div>
+        <div class="ach-sub">Qualified Prelims Level 1 nationally — business & tech aptitude</div>
+      </div>
+    </div>
+    <div class="ach-card fade-up">
+      <div class="ach-icon">🏦</div>
+      <div>
+        <div class="ach-title">RBIH Financial Literacy Ideathon</div>
+        <div class="ach-sub">Top 200 out of 7,000+ applicants — Reserve Bank Innovation Hub</div>
+      </div>
+    </div>
+    <div class="ach-card fade-up">
+      <div class="ach-icon">🎯</div>
+      <div>
+        <div class="ach-title">24th VTU Youth Fest 2025</div>
+        <div class="ach-sub">Core Organising Committee — coordinated 5,000+ student event</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Say Hello</div>
+  <h2>Get In Touch</h2>
+  <p class="contact-sub">Open to internships, research collaborations, and full-time roles at ISRO, Indian Army tech, and top tech companies.</p>
+  <div class="contact-links">
+    <a href="mailto:Vinayakas307@gmail.com" class="contact-btn">✉️ Email Me</a>
+    <a href="https://github.com/Vinayakashiva" target="_blank" class="contact-btn">⌥ GitHub</a>
+    <a href="tel:+917022656317" class="contact-btn">📞 Call</a>
+  </div>
+</section>
+
+<footer>Built by Vinayaka S · AI/ML Engineer · Bengaluru, India · 2025</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
