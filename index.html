@@ -4,332 +4,297 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Vinayaka S — AI/ML Engineer</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --ink: #0d1117;
+  --ink2: #1c2333;
+  --blue: #3b82f6;
+  --blue2: #1d4ed8;
+  --cyan: #06b6d4;
+  --green: #22c55e;
+  --purple: #a855f7;
+  --amber: #f59e0b;
+  --red: #ef4444;
+  --rose: #f43f5e;
+  --bg: #f6f8ff;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: #e1e7f0;
+  --mono: 'DM Mono', monospace;
+}
 
-  :root {
-    --navy: #0f1f45;
-    --navy2: #1B3A6B;
-    --blue: #2563EB;
-    --blue-light: #dbeafe;
-    --accent: #38bdf8;
-    --bg: #f8faff;
-    --card: #ffffff;
-    --text: #0f172a;
-    --muted: #64748b;
-    --border: #e2e8f0;
-    --tag-bg: #eff6ff;
-    --tag-text: #1d4ed8;
-    --green: #10b981;
-  }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
 
-  html { scroll-behavior: smooth; }
+/* ── PAGE SYSTEM ── */
+.page { display: none; min-height: 100vh; }
+.page.active { display: block; }
 
-  body {
-    font-family: 'Space Grotesk', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(246,248,255,0.88); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5vw; height: 58px;
+}
+.nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--ink); cursor: pointer; }
+.nav-logo span { color: var(--blue); }
+.nav-links { display: flex; gap: 1.8rem; }
+.nav-links a { text-decoration: none; color: var(--muted); font-size: 0.88rem; font-weight: 500; transition: color .2s; cursor: pointer; }
+.nav-links a:hover { color: var(--blue); }
+.nav-back { display: none; align-items: center; gap: 8px; cursor: pointer; color: var(--blue); font-weight: 600; font-size: 0.9rem; background: none; border: none; font-family: inherit; }
+.nav-back:hover { opacity: .75; }
+.nav-back svg { width: 18px; height: 18px; }
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(248,250,255,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 5vw; height: 60px;
-  }
-  .nav-logo {
-    font-weight: 700; font-size: 1.1rem; color: var(--navy);
-    letter-spacing: -0.5px;
-  }
-  .nav-logo span { color: var(--blue); }
-  .nav-links { display: flex; gap: 2rem; }
-  .nav-links a {
-    text-decoration: none; color: var(--muted); font-size: 0.9rem;
-    font-weight: 500; transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--blue); }
+/* ── HERO ── */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 90px 5vw 60px; position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 700px 500px at 80% 20%, rgba(59,130,246,.06) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 400px at 10% 80%, rgba(168,85,247,.05) 0%, transparent 70%);
+}
+.hero-grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px; opacity: .35;
+}
+.hero-content { max-width: 660px; position: relative; z-index: 1; }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 7px;
+  border: 1px solid var(--border); border-radius: 100px;
+  padding: 5px 14px; font-size: 0.78rem; font-weight: 600;
+  color: var(--muted); margin-bottom: 1.5rem; background: var(--card);
+  font-family: var(--mono);
+}
+.live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex; align-items: center;
-    padding: 80px 5vw 60px;
-    position: relative; overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute; top: -200px; right: -200px;
-    width: 600px; height: 600px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(37,99,235,0.08) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-content { max-width: 640px; }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: var(--blue-light); color: var(--blue);
-    border: 1px solid #bfdbfe; border-radius: 100px;
-    padding: 4px 14px; font-size: 0.8rem; font-weight: 600;
-    margin-bottom: 1.5rem; letter-spacing: 0.3px;
-  }
-  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.8rem, 6vw, 4.2rem); font-weight: 800;
+  line-height: 1.05; letter-spacing: -2px; color: var(--ink);
+  margin-bottom: 1.2rem;
+}
+h1 em { font-style: normal; color: var(--blue); }
+.hero-sub { font-size: 1.05rem; color: var(--muted); margin-bottom: 2.2rem; max-width: 520px; line-height: 1.7; }
+.hero-btns { display: flex; gap: .9rem; flex-wrap: wrap; }
+.btn { padding: 11px 26px; border-radius: 9px; font-weight: 600; font-size: .9rem; cursor: pointer; text-decoration: none; border: none; transition: all .2s; display: inline-flex; align-items: center; gap: 7px; }
+.btn-primary { background: var(--ink); color: #fff; }
+.btn-primary:hover { background: var(--ink2); transform: translateY(-1px); }
+.btn-outline { background: transparent; color: var(--ink); border: 1.5px solid var(--border); }
+.btn-outline:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-1px); }
 
-  h1 {
-    font-size: clamp(2.4rem, 5vw, 3.6rem);
-    font-weight: 700; line-height: 1.1;
-    letter-spacing: -1.5px; color: var(--navy);
-    margin-bottom: 1rem;
-  }
-  h1 span { color: var(--blue); }
-  .hero-sub {
-    font-size: 1.1rem; color: var(--muted); margin-bottom: 2rem;
-    font-weight: 400; max-width: 500px;
-  }
-  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .btn-primary {
-    background: var(--blue); color: #fff;
-    padding: 12px 28px; border-radius: 10px;
-    text-decoration: none; font-weight: 600; font-size: 0.95rem;
-    border: 2px solid var(--blue); transition: all 0.2s;
-  }
-  .btn-primary:hover { background: #1d4ed8; border-color: #1d4ed8; transform: translateY(-1px); }
-  .btn-outline {
-    background: transparent; color: var(--navy);
-    padding: 12px 28px; border-radius: 10px;
-    text-decoration: none; font-weight: 600; font-size: 0.95rem;
-    border: 2px solid var(--border); transition: all 0.2s;
-  }
-  .btn-outline:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-1px); }
+.hero-stats { display: flex; gap: 2.5rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); flex-wrap: wrap; }
+.stat-v { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--ink); }
+.stat-l { font-size: .78rem; color: var(--muted); font-weight: 500; margin-top: 2px; }
 
-  .hero-stats {
-    display: flex; gap: 2.5rem; margin-top: 3rem;
-    padding-top: 2rem; border-top: 1px solid var(--border);
-  }
-  .stat-val { font-size: 1.6rem; font-weight: 700; color: var(--navy); }
-  .stat-lbl { font-size: 0.8rem; color: var(--muted); font-weight: 500; }
+/* ── SECTIONS ── */
+section { padding: 80px 5vw; }
+.sec-label { font-family: var(--mono); font-size: .72rem; color: var(--blue); letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: .5rem; }
+h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.9rem, 3vw, 2.6rem); font-weight: 800; color: var(--ink); letter-spacing: -1px; margin-bottom: .5rem; }
+.sec-desc { color: var(--muted); font-size: .97rem; margin-bottom: 2.8rem; max-width: 560px; }
 
-  /* SECTION COMMON */
-  section { padding: 80px 5vw; }
-  .section-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem; color: var(--blue); font-weight: 500;
-    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem;
-  }
-  h2 {
-    font-size: clamp(1.8rem, 3vw, 2.4rem);
-    font-weight: 700; color: var(--navy);
-    letter-spacing: -0.8px; margin-bottom: 0.5rem;
-  }
-  .section-desc { color: var(--muted); font-size: 1rem; margin-bottom: 3rem; max-width: 560px; }
+/* ── ABOUT ── */
+#about { background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.about-text p { color: var(--muted); margin-bottom: .9rem; font-size: .95rem; }
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 1.5rem; }
+.chip { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; border-radius: 6px; padding: 4px 11px; font-size: .78rem; font-weight: 600; }
+.about-cards { display: flex; flex-direction: column; gap: .9rem; }
+.info-card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: .9rem 1.1rem; display: flex; align-items: center; gap: .9rem; }
+.info-icon { width: 38px; height: 38px; border-radius: 9px; background: #eff6ff; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+.info-ttl { font-weight: 600; font-size: .88rem; color: var(--ink); }
+.info-sub { font-size: .78rem; color: var(--muted); }
 
-  /* ABOUT */
-  #about { background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-  .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 0.97rem; }
-  .about-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.5rem; }
-  .tag {
-    background: var(--tag-bg); color: var(--tag-text);
-    border: 1px solid #bfdbfe; border-radius: 6px;
-    padding: 4px 12px; font-size: 0.8rem; font-weight: 600;
-  }
-  .about-cards { display: flex; flex-direction: column; gap: 1rem; }
-  .info-card {
-    background: var(--bg); border: 1px solid var(--border);
-    border-radius: 12px; padding: 1rem 1.25rem;
-    display: flex; align-items: center; gap: 1rem;
-  }
-  .info-icon {
-    width: 40px; height: 40px; border-radius: 10px;
-    background: var(--blue-light); display: flex; align-items: center;
-    justify-content: center; font-size: 1.2rem; flex-shrink: 0;
-  }
-  .info-title { font-weight: 600; font-size: 0.9rem; color: var(--navy); }
-  .info-sub { font-size: 0.8rem; color: var(--muted); }
+/* ── PROJECTS ── */
+.proj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.4rem; }
+.proj-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+  padding: 1.4rem; cursor: pointer; transition: transform .2s, box-shadow .2s;
+  position: relative; overflow: hidden;
+}
+.proj-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.proj-card.bci::before { background: linear-gradient(90deg, #a855f7, #3b82f6); }
+.proj-card.cv::before { background: linear-gradient(90deg, #06b6d4, #22c55e); }
+.proj-card.voice::before { background: linear-gradient(90deg, #f59e0b, #ef4444); }
+.proj-card.moon::before { background: linear-gradient(90deg, #1d4ed8, #06b6d4); }
+.proj-card.body::before { background: linear-gradient(90deg, #22c55e, #06b6d4); }
+.proj-card.v2v::before { background: linear-gradient(90deg, #ef4444, #f59e0b); }
+.proj-card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(59,130,246,.12); }
+.proj-hd { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: .75rem; }
+.proj-icon { width: 42px; height: 42px; border-radius: 10px; background: #eff6ff; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
+.proj-badge { font-size: .7rem; font-weight: 700; padding: 3px 10px; border-radius: 100px; }
+.badge-bci { background: #f3e8ff; color: #7c3aed; }
+.badge-cv { background: #ecfeff; color: #0e7490; }
+.badge-ai { background: #fff7ed; color: #c2410c; }
+.badge-space { background: #eff6ff; color: #1d4ed8; }
+.badge-ml { background: #f0fdf4; color: #15803d; }
+.badge-iot { background: #fff1f2; color: #be123c; }
+.proj-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: .45rem; }
+.proj-desc { font-size: .84rem; color: var(--muted); line-height: 1.6; margin-bottom: .9rem; }
+.proj-metric { display: inline-block; background: #f8faff; border: 1px solid #bfdbfe; color: #1d4ed8; border-radius: 6px; padding: 3px 10px; font-size: .76rem; font-weight: 700; font-family: var(--mono); margin-bottom: .9rem; }
+.proj-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.proj-tag { font-size: .72rem; font-weight: 500; background: var(--bg); border: 1px solid var(--border); border-radius: 5px; padding: 2px 8px; color: var(--muted); }
+.proj-cta { margin-top: 1rem; font-size: .8rem; font-weight: 600; color: var(--blue); display: flex; align-items: center; gap: 4px; }
 
-  /* PROJECTS */
-  #projects { background: var(--bg); }
-  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 1.5rem; }
-  .project-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 16px; padding: 1.5rem;
-    transition: transform 0.2s, box-shadow 0.2s;
-    position: relative; overflow: hidden;
-  }
-  .project-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, var(--blue), var(--accent));
-  }
-  .project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(37,99,235,0.12); }
-  .proj-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 0.75rem; }
-  .proj-icon {
-    width: 44px; height: 44px; border-radius: 10px;
-    background: var(--blue-light); display: flex; align-items: center;
-    justify-content: center; font-size: 1.4rem;
-  }
-  .proj-badge {
-    font-size: 0.72rem; font-weight: 600; padding: 3px 10px;
-    border-radius: 100px;
-  }
-  .badge-ml { background: #fef3c7; color: #92400e; }
-  .badge-cv { background: #dcfce7; color: #166534; }
-  .badge-embedded { background: #fce7f3; color: #9d174d; }
-  .badge-bci { background: #ede9fe; color: #4c1d95; }
-  .proj-title { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
-  .proj-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
-  .proj-metric {
-    display: inline-block;
-    background: var(--blue-light); color: var(--blue);
-    border-radius: 6px; padding: 3px 10px;
-    font-size: 0.78rem; font-weight: 700;
-    font-family: 'JetBrains Mono', monospace;
-    margin-bottom: 1rem;
-  }
-  .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .proj-tag {
-    font-size: 0.74rem; font-weight: 500;
-    background: var(--bg); border: 1px solid var(--border);
-    border-radius: 5px; padding: 2px 8px; color: var(--muted);
-  }
+/* ── SKILLS ── */
+#skills { background: var(--ink); }
+#skills h2 { color: #fff; }
+#skills .sec-label { color: var(--cyan); }
+#skills .sec-desc { color: rgba(255,255,255,.5); }
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.3rem; }
+.skill-grp { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); border-radius: 13px; padding: 1.3rem; }
+.skill-grp-ttl { font-family: var(--mono); font-size: .72rem; font-weight: 500; color: var(--cyan); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 1rem; }
+.skill-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: .65rem; }
+.skill-nm { font-size: .86rem; color: rgba(255,255,255,.82); font-weight: 500; }
+.skill-bar { width: 72px; height: 3px; background: rgba(255,255,255,.1); border-radius: 3px; overflow: hidden; }
+.skill-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--blue), var(--cyan)); }
 
-  /* SKILLS */
-  #skills { background: var(--navy); color: #fff; }
-  #skills h2 { color: #fff; }
-  #skills .section-label { color: var(--accent); }
-  #skills .section-desc { color: rgba(255,255,255,0.55); }
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
-  .skill-group {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 14px; padding: 1.5rem;
-  }
-  .skill-group-title {
-    font-size: 0.78rem; font-weight: 600; color: var(--accent);
-    letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1rem;
-    font-family: 'JetBrains Mono', monospace;
-  }
-  .skill-item {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 0.75rem;
-  }
-  .skill-name { font-size: 0.88rem; color: rgba(255,255,255,0.85); font-weight: 500; }
-  .skill-bar { width: 80px; height: 4px; background: rgba(255,255,255,0.12); border-radius: 4px; overflow: hidden; }
-  .skill-fill { height: 100%; background: linear-gradient(90deg, var(--blue), var(--accent)); border-radius: 4px; }
+/* ── EXPERIENCE ── */
+#experience { background: var(--card); border-top: 1px solid var(--border); }
+.timeline { position: relative; padding-left: 1.8rem; }
+.timeline::before { content: ''; position: absolute; left: 6px; top: 8px; bottom: 8px; width: 2px; background: var(--border); }
+.tl-item { position: relative; margin-bottom: 2.2rem; }
+.tl-dot { position: absolute; left: -1.8rem; top: 6px; width: 14px; height: 14px; border-radius: 50%; background: var(--blue); border: 3px solid var(--card); box-shadow: 0 0 0 2px var(--blue); }
+.tl-hd { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: .5rem; }
+.tl-ttl { font-family: 'Syne', sans-serif; font-weight: 700; color: var(--ink); font-size: .97rem; }
+.tl-co { font-size: .83rem; color: var(--blue); font-weight: 600; margin-top: 2px; }
+.tl-date { font-size: .76rem; color: var(--muted); font-family: var(--mono); background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 3px 9px; white-space: nowrap; }
+.tl-list { margin-top: .65rem; padding-left: 1.1rem; }
+.tl-list li { font-size: .86rem; color: var(--muted); margin-bottom: .35rem; }
 
-  /* EXPERIENCE */
-  #experience { background: var(--card); border-top: 1px solid var(--border); }
-  .timeline { position: relative; padding-left: 2rem; }
-  .timeline::before {
-    content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px;
-    width: 2px; background: var(--border);
-  }
-  .timeline-item { position: relative; margin-bottom: 2.5rem; }
-  .timeline-dot {
-    position: absolute; left: -2rem; top: 6px;
-    width: 16px; height: 16px; border-radius: 50%;
-    background: var(--blue); border: 3px solid var(--card);
-    box-shadow: 0 0 0 2px var(--blue);
-  }
-  .tl-header { display: flex; align-items: flex-start; gap: 1rem; justify-content: space-between; flex-wrap: wrap; }
-  .tl-title { font-weight: 700; color: var(--navy); font-size: 1rem; }
-  .tl-company { font-size: 0.85rem; color: var(--blue); font-weight: 600; }
-  .tl-date {
-    font-size: 0.78rem; color: var(--muted);
-    font-family: 'JetBrains Mono', monospace;
-    background: var(--bg); border: 1px solid var(--border);
-    border-radius: 6px; padding: 3px 10px; white-space: nowrap;
-  }
-  .tl-bullets { margin-top: 0.75rem; padding-left: 1.2rem; }
-  .tl-bullets li { font-size: 0.88rem; color: var(--muted); margin-bottom: 0.4rem; }
+/* ── ACHIEVEMENTS ── */
+#achievements { background: var(--bg); }
+.ach-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.1rem; }
+.ach-card { background: var(--card); border: 1px solid var(--border); border-radius: 13px; padding: 1.1rem 1.2rem; display: flex; gap: .9rem; align-items: flex-start; cursor: pointer; transition: transform .2s, box-shadow .2s; }
+.ach-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.07); }
+.ach-icon { font-size: 1.4rem; width: 42px; height: 42px; border-radius: 9px; background: #eff6ff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ach-ttl { font-weight: 700; font-size: .88rem; color: var(--ink); margin-bottom: .2rem; }
+.ach-sub { font-size: .78rem; color: var(--muted); }
+.ach-cta { font-size: .74rem; color: var(--blue); font-weight: 600; margin-top: .4rem; }
 
-  /* ACHIEVEMENTS */
-  #achievements { background: var(--bg); }
-  .ach-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
-  .ach-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 14px; padding: 1.25rem;
-    display: flex; gap: 1rem; align-items: flex-start;
-    transition: transform 0.2s;
-  }
-  .ach-card:hover { transform: translateY(-2px); }
-  .ach-icon {
-    font-size: 1.5rem; flex-shrink: 0;
-    width: 44px; height: 44px; border-radius: 10px;
-    background: var(--blue-light); display: flex; align-items: center; justify-content: center;
-  }
-  .ach-title { font-weight: 700; font-size: 0.9rem; color: var(--navy); margin-bottom: 0.25rem; }
-  .ach-sub { font-size: 0.8rem; color: var(--muted); }
+/* ── CONTACT ── */
+#contact { background: linear-gradient(135deg, var(--ink) 0%, #1e3a8a 100%); text-align: center; }
+#contact h2 { color: #fff; }
+#contact .sec-label { color: var(--cyan); }
+.contact-sub { color: rgba(255,255,255,.55); margin-bottom: 2.2rem; font-size: .97rem; }
+.contact-links { display: flex; justify-content: center; gap: .9rem; flex-wrap: wrap; }
+.c-btn { display: flex; align-items: center; gap: 7px; background: rgba(255,255,255,.1); color: #fff; border: 1px solid rgba(255,255,255,.18); border-radius: 9px; padding: 11px 20px; text-decoration: none; font-weight: 600; font-size: .88rem; transition: all .2s; cursor: pointer; }
+.c-btn:hover { background: rgba(255,255,255,.18); transform: translateY(-2px); }
 
-  /* CONTACT */
-  #contact {
-    background: linear-gradient(135deg, var(--navy) 0%, #1e3a8a 100%);
-    text-align: center; color: #fff;
-  }
-  #contact h2 { color: #fff; }
-  #contact .section-label { color: var(--accent); }
-  .contact-sub { color: rgba(255,255,255,0.6); margin-bottom: 2.5rem; font-size: 1rem; }
-  .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-  .contact-btn {
-    display: flex; align-items: center; gap: 8px;
-    background: rgba(255,255,255,0.1); color: #fff;
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 10px; padding: 12px 22px;
-    text-decoration: none; font-weight: 600; font-size: 0.9rem;
-    transition: all 0.2s;
-  }
-  .contact-btn:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+footer { background: #060c18; color: rgba(255,255,255,.3); text-align: center; padding: 1.2rem; font-size: .78rem; }
 
-  /* FOOTER */
-  footer {
-    background: #070f1f; color: rgba(255,255,255,0.4);
-    text-align: center; padding: 1.5rem;
-    font-size: 0.8rem;
-  }
+/* ── DETAIL PAGE ── */
+.detail-page { padding-top: 78px; min-height: 100vh; background: var(--bg); }
+.detail-hero { background: var(--card); border-bottom: 1px solid var(--border); padding: 3rem 5vw 2.5rem; }
+.detail-breadcrumb { font-family: var(--mono); font-size: .75rem; color: var(--muted); margin-bottom: 1.2rem; }
+.detail-breadcrumb span { color: var(--blue); }
+.detail-title { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: var(--ink); letter-spacing: -1px; margin-bottom: .7rem; }
+.detail-meta { display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: 1.2rem; }
+.detail-chip { font-size: .76rem; font-weight: 600; padding: 4px 12px; border-radius: 100px; border: 1px solid var(--border); color: var(--muted); background: var(--bg); font-family: var(--mono); }
+.detail-body { padding: 3rem 5vw; max-width: 860px; }
+.detail-body h3 { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--ink); margin: 2rem 0 .7rem; }
+.detail-body p { color: var(--muted); font-size: .95rem; line-height: 1.75; margin-bottom: 1rem; }
+.detail-body ul { padding-left: 1.3rem; margin-bottom: 1rem; }
+.detail-body ul li { color: var(--muted); font-size: .93rem; line-height: 1.7; margin-bottom: .4rem; }
+.detail-body strong { color: var(--ink); font-weight: 600; }
 
-  /* ANIMATIONS */
-  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.5s ease, transform 0.5s ease; }
-  .fade-up.visible { opacity: 1; transform: translateY(0); }
+.detail-media { margin: 2rem 0; }
+.media-placeholder {
+  background: linear-gradient(135deg, #0f1117 0%, #1c2333 100%);
+  border-radius: 14px; overflow: hidden; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 260px; border: 1px solid var(--border);
+}
+.media-placeholder.tall { min-height: 380px; }
+.media-icon { font-size: 3rem; opacity: .3; }
+.media-label { position: absolute; bottom: 16px; left: 16px; font-family: var(--mono); font-size: .72rem; color: rgba(255,255,255,.4); }
+.video-placeholder {
+  background: linear-gradient(135deg, #0f1117 0%, #1e1a2e 100%);
+  border-radius: 14px; overflow: hidden; min-height: 320px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border); flex-direction: column; gap: 1rem;
+  cursor: pointer; transition: opacity .2s;
+}
+.video-placeholder:hover { opacity: .85; }
+.play-btn { width: 64px; height: 64px; border-radius: 50%; background: rgba(59,130,246,.2); border: 2px solid rgba(59,130,246,.4); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; }
+.video-label { font-family: var(--mono); font-size: .78rem; color: rgba(255,255,255,.5); }
 
-  @media(max-width: 768px) {
-    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .hero-stats { gap: 1.5rem; }
-    .nav-links { display: none; }
-  }
+.stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+.stat-box { background: var(--card); border: 1px solid var(--border); border-radius: 11px; padding: 1rem; text-align: center; }
+.stat-box .v { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--blue); }
+.stat-box .l { font-size: .76rem; color: var(--muted); margin-top: 3px; }
+
+.img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+.img-box { border-radius: 12px; overflow: hidden; background: linear-gradient(135deg, #0f1117, #1c2333); min-height: 180px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); flex-direction: column; gap: .5rem; }
+.img-box .emoji { font-size: 2.2rem; opacity: .35; }
+.img-box .lbl { font-family: var(--mono); font-size: .68rem; color: rgba(255,255,255,.3); }
+
+.back-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--card); border: 1.5px solid var(--border); color: var(--blue); border-radius: 8px; padding: 9px 18px; font-weight: 600; font-size: .88rem; cursor: pointer; transition: all .2s; margin-top: 2rem; text-decoration: none; }
+.back-btn:hover { border-color: var(--blue); transform: translateX(-2px); }
+
+/* ── ACH DETAIL ── */
+.ach-detail-hero { background: var(--card); border-bottom: 1px solid var(--border); padding: 3rem 5vw 2.5rem; }
+.ach-badge-big { font-size: 3.5rem; margin-bottom: 1rem; }
+
+/* ── ANIMATIONS ── */
+.fade { opacity: 0; transform: translateY(20px); transition: opacity .5s, transform .5s; }
+.fade.in { opacity: 1; transform: translateY(0); }
+
+@media(max-width:768px){
+  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .nav-links { display: none; }
+  .img-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-logo">VS<span>.</span></div>
-  <div class="nav-links">
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#skills">Skills</a>
-    <a href="#experience">Experience</a>
-    <a href="#contact">Contact</a>
+<!-- ═══════════════════════ NAV ═══════════════════════ -->
+<nav id="main-nav">
+  <div class="nav-logo" onclick="showMain()">VS<span>.</span></div>
+  <div class="nav-links" id="main-nav-links">
+    <a onclick="scrollTo('#about')">About</a>
+    <a onclick="scrollTo('#projects')">Projects</a>
+    <a onclick="scrollTo('#skills')">Skills</a>
+    <a onclick="scrollTo('#experience')">Experience</a>
+    <a onclick="scrollTo('#contact')">Contact</a>
   </div>
+  <button class="nav-back" id="nav-back" onclick="showMain()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Back
+  </button>
 </nav>
+
+<!-- ═══════════════════════ MAIN PAGE ═══════════════════════ -->
+<div class="page active" id="page-main">
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-content fade-up">
-    <div class="hero-badge"><div class="dot"></div> Open to Opportunities</div>
-    <h1>Vinayaka <span>S</span></h1>
-    <p class="hero-sub">AI/ML Engineer building intelligent systems for computer vision, embedded AI, and signal processing — targeting ISRO, Indian Army tech, and Google.</p>
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content fade">
+    <div class="hero-tag"><div class="live-dot"></div> Open to Opportunities</div>
+    <h1>Vinayaka <em>S</em></h1>
+    <p class="hero-sub">AI/ML Engineer building intelligent systems — from EEG brain-computer interfaces and computer vision to voice AI assistants and space-tech innovation.</p>
     <div class="hero-btns">
-      <a href="#projects" class="btn-primary">View Projects</a>
-      <a href="mailto:Vinayakas307@gmail.com" class="btn-outline">Get in Touch</a>
+      <button class="btn btn-primary" onclick="scrollTo('#projects')">View Projects</button>
+      <a href="mailto:vinayakas307@gmail.com" class="btn btn-outline">Get in Touch</a>
     </div>
     <div class="hero-stats">
-      <div><div class="stat-val">96.5%</div><div class="stat-lbl">YOLOv8 Accuracy</div></div>
-      <div><div class="stat-val">5+</div><div class="stat-lbl">AI Projects</div></div>
-      <div><div class="stat-val">2</div><div class="stat-lbl">Industry Internships</div></div>
-      <div><div class="stat-val">Top 200</div><div class="stat-lbl">RBIH Ideathon</div></div>
+      <div><div class="stat-v">96.5%</div><div class="stat-l">YOLOv8 Accuracy</div></div>
+      <div><div class="stat-v">61.6%</div><div class="stat-l">EEG BCI Accuracy</div></div>
+      <div><div class="stat-v">2</div><div class="stat-l">Internships</div></div>
+      <div><div class="stat-v">Top 200</div><div class="stat-l">RBIH Ideathon</div></div>
     </div>
   </div>
 </section>
@@ -337,126 +302,86 @@
 <!-- ABOUT -->
 <section id="about">
   <div class="about-grid">
-    <div class="about-text fade-up">
-      <div class="section-label">About Me</div>
+    <div class="about-text fade">
+      <div class="sec-label">About Me</div>
       <h2>Building AI for<br/>National Impact</h2>
-      <p style="margin-top:1rem;">I'm a 6th-sem B.E. AI/ML student at Global Academy of Technology, Bengaluru. My work spans computer vision, EEG-based brain-computer interfaces, and embedded AI systems.</p>
-      <p>I've interned at Infosys Springboard and Pantech Solutions, and participated in national-level competitions including the ISRO Bharatiya Antariksh Hackathon and the Tata Crucible Campus Quiz.</p>
-      <p>My goal is to build AI solutions that matter — for defence technology, space research, and large-scale engineering challenges facing India.</p>
-      <div class="about-tags">
-        <span class="tag">Computer Vision</span>
-        <span class="tag">PyTorch</span>
-        <span class="tag">YOLOv8</span>
-        <span class="tag">EEG / BCI</span>
-        <span class="tag">Embedded AI</span>
-        <span class="tag">ESP32</span>
-        <span class="tag">LangChain</span>
+      <p style="margin-top:1rem;">I'm a 3rd-year B.E. AI/ML student at Global Academy of Technology, Bengaluru. My work spans computer vision, EEG-based brain-computer interfaces, embedded AI, and voice-driven desktop automation.</p>
+      <p>I've interned at Infosys Springboard and Pantech Solutions, delivered a research paper to IEEE InC4 2026, and participated in national competitions including ISRO Bharatiya Antariksh Hackathon and the Tata Crucible Campus Quiz.</p>
+      <p>My goal is to build AI that matters — for defence, space research, and large-scale engineering challenges facing India.</p>
+      <div class="tag-cloud">
+        <span class="chip">Computer Vision</span><span class="chip">PyTorch</span><span class="chip">YOLOv8</span>
+        <span class="chip">EEG / BCI</span><span class="chip">Embedded AI</span><span class="chip">ESP32</span>
+        <span class="chip">Gemini API</span><span class="chip">Signal Processing</span>
       </div>
     </div>
-    <div class="about-cards fade-up">
-      <div class="info-card">
-        <div class="info-icon">🎓</div>
-        <div>
-          <div class="info-title">Global Academy of Technology</div>
-          <div class="info-sub">B.E. (Hons) AIML · VTU · 2023–2027</div>
-        </div>
-      </div>
-      <div class="info-card">
-        <div class="info-icon">📍</div>
-        <div>
-          <div class="info-title">Bengaluru, Karnataka</div>
-          <div class="info-sub">Open to remote & relocation</div>
-        </div>
-      </div>
-      <div class="info-card">
-        <div class="info-icon">🚀</div>
-        <div>
-          <div class="info-title">Target Roles</div>
-          <div class="info-sub">ISRO · Indian Army Tech · Google</div>
-        </div>
-      </div>
-      <div class="info-card">
-        <div class="info-icon">💻</div>
-        <div>
-          <div class="info-title">github.com/Vinayakashiva</div>
-          <div class="info-sub">Python · PyTorch · OpenCV · ESP32</div>
-        </div>
-      </div>
+    <div class="about-cards fade">
+      <div class="info-card"><div class="info-icon">🎓</div><div><div class="info-ttl">Global Academy of Technology</div><div class="info-sub">B.E. AI & ML · VTU · 2023–2027</div></div></div>
+      <div class="info-card"><div class="info-icon">📍</div><div><div class="info-ttl">Bengaluru, Karnataka</div><div class="info-sub">Open to remote & relocation</div></div></div>
+      <div class="info-card"><div class="info-icon">🚀</div><div><div class="info-ttl">Target Roles</div><div class="info-sub">ISRO · Indian Army Tech · Google</div></div></div>
+      <div class="info-card"><div class="info-icon">💻</div><div><div class="info-ttl">github.com/Vinayakashiva</div><div class="info-sub">Python · PyTorch · OpenCV · ESP32</div></div></div>
     </div>
   </div>
 </section>
 
 <!-- PROJECTS -->
-<section id="projects">
-  <div class="section-label">Featured Work</div>
+<section id="projects" style="background:var(--bg);">
+  <div class="sec-label">Featured Work</div>
   <h2>Technical Projects</h2>
-  <p class="section-desc">Real projects across computer vision, signal processing, embedded systems, and wireless communication.</p>
+  <p class="sec-desc">Real projects across computer vision, signal processing, voice AI, embedded systems, and space-tech.</p>
+  <div class="proj-grid">
 
-  <div class="projects-grid">
-
-    <div class="project-card fade-up">
-      <div class="proj-header">
-        <div class="proj-icon">🧠</div>
-        <span class="proj-badge badge-bci">BCI / Signal</span>
-      </div>
+    <div class="proj-card bci fade" onclick="showDetail('eeg')">
+      <div class="proj-hd"><div class="proj-icon">🧠</div><span class="proj-badge badge-bci">BCI / Signal</span></div>
       <div class="proj-title">EEG Brain-Computer Interface</div>
-      <div class="proj-desc">Classified imagined speech (Bilabial vs. Non-Bilabial) from 64-channel EEG using CSP spatial filtering and LinearSVC across 15 subjects.</div>
-      <div class="proj-metric">61.6% balanced accuracy · p &lt; 0.0001</div>
-      <div class="proj-tags">
-        <span class="proj-tag">Python</span><span class="proj-tag">CSP</span><span class="proj-tag">LinearSVC</span><span class="proj-tag">EEG</span><span class="proj-tag">Signal Processing</span>
-      </div>
+      <div class="proj-desc">Secure AI-powered BCI that decodes imagined speech from 64-channel EEG signals across 15 subjects — restoring communication for those with motor/vocal impairments.</div>
+      <div class="proj-metric">61.6% accuracy · p &lt; 0.0001 · IEEE InC4 2026</div>
+      <div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">CSP</span><span class="proj-tag">LinearSVC</span><span class="proj-tag">MNE</span><span class="proj-tag">Streamlit</span><span class="proj-tag">AES</span></div>
+      <div class="proj-cta">View full details →</div>
     </div>
 
-    <div class="project-card fade-up">
-      <div class="proj-header">
-        <div class="proj-icon">🔍</div>
-        <span class="proj-badge badge-cv">Computer Vision</span>
-      </div>
-      <div class="proj-title">PCB Defect Detection (YOLOv8)</div>
-      <div class="proj-desc">End-to-end YOLOv8 pipeline for industrial PCB quality inspection with real-time Streamlit dashboard for production monitoring.</div>
-      <div class="proj-metric">96.5% accuracy · 10,000+ images</div>
-      <div class="proj-tags">
-        <span class="proj-tag">YOLOv8</span><span class="proj-tag">OpenCV</span><span class="proj-tag">Streamlit</span><span class="proj-tag">PyTorch</span>
-      </div>
+    <div class="proj-card cv fade" onclick="showDetail('pcb')">
+      <div class="proj-hd"><div class="proj-icon">🔍</div><span class="proj-badge badge-cv">Computer Vision</span></div>
+      <div class="proj-title">PCB Defect Detection (Infosys)</div>
+      <div class="proj-desc">End-to-end YOLOv8 defect detection pipeline for industrial PCB quality inspection with a real-time Streamlit dashboard — reducing manual inspection by ~40%.</div>
+      <div class="proj-metric">96.5% accuracy · 10K images · ~40% effort saved</div>
+      <div class="proj-tags"><span class="proj-tag">YOLOv8</span><span class="proj-tag">FastAPI</span><span class="proj-tag">Streamlit</span><span class="proj-tag">PyTorch</span><span class="proj-tag">OpenCV</span></div>
+      <div class="proj-cta">View full details →</div>
     </div>
 
-    <div class="project-card fade-up">
-      <div class="proj-header">
-        <div class="proj-icon">📡</div>
-        <span class="proj-badge badge-embedded">Embedded / IoT</span>
-      </div>
-      <div class="proj-title">V2V Communication System</div>
-      <div class="proj-desc">Wireless vehicle-to-vehicle collision avoidance framework using Python and ESP32/NRF24L01 for real-time safety alerts between autonomous nodes.</div>
-      <div class="proj-metric">Real-time · Sub-50ms latency</div>
-      <div class="proj-tags">
-        <span class="proj-tag">Python</span><span class="proj-tag">ESP32</span><span class="proj-tag">NRF24L01</span><span class="proj-tag">Wireless</span>
-      </div>
+    <div class="proj-card voice fade" onclick="showDetail('sanju')">
+      <div class="proj-hd"><div class="proj-icon">🤖</div><span class="proj-badge badge-ai">Voice AI</span></div>
+      <div class="proj-title">Sanju — AI Desktop Assistant</div>
+      <div class="proj-desc">Voice-activated AI assistant that writes code directly into Python files, opens apps, searches the browser, and holds persistent conversations — built entirely with free APIs.</div>
+      <div class="proj-metric">Gemini API · PyQt6 · Real-time TTS · App Control</div>
+      <div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">Gemini</span><span class="proj-tag">PyQt6</span><span class="proj-tag">Edge TTS</span><span class="proj-tag">PyAutoGUI</span></div>
+      <div class="proj-cta">View full details →</div>
     </div>
 
-    <div class="project-card fade-up">
-      <div class="proj-header">
-        <div class="proj-icon">📐</div>
-        <span class="proj-badge badge-cv">Computer Vision</span>
-      </div>
-      <div class="proj-title">3D Body Measurement System</div>
-      <div class="proj-desc">CNN-based app estimating precise human body measurements from single 2D images using pose estimation preprocessing for virtual try-on retail.</div>
-      <div class="proj-metric">Single-image 3D estimation</div>
-      <div class="proj-tags">
-        <span class="proj-tag">CNN</span><span class="proj-tag">Pose Estimation</span><span class="proj-tag">TensorFlow</span><span class="proj-tag">OpenCV</span>
-      </div>
+    <div class="proj-card moon fade" onclick="showDetail('moon')">
+      <div class="proj-hd"><div class="proj-icon">🌙</div><span class="proj-badge badge-space">Space Tech</span></div>
+      <div class="proj-title">Lunar Noise Cancellation (SIH)</div>
+      <div class="proj-desc">Image enhancement system for noise cancellation in dark lunar surface imagery — submitted for Smart India Hackathon to aid ISRO's lunar exploration data pipelines.</div>
+      <div class="proj-metric">Smart India Hackathon · Deep Image Processing</div>
+      <div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">OpenCV</span><span class="proj-tag">CNNs</span><span class="proj-tag">NumPy</span><span class="proj-tag">Image Processing</span></div>
+      <div class="proj-cta">View full details →</div>
     </div>
 
-    <div class="project-card fade-up">
-      <div class="proj-header">
-        <div class="proj-icon">🤖</div>
-        <span class="proj-badge badge-embedded">Embedded AI</span>
-      </div>
-      <div class="proj-title">AI Mini Robot</div>
-      <div class="proj-desc">Autonomous Python-powered robot with interactive voice recognition and IR sensors — bridging hardware and AI for real-time edge inference.</div>
-      <div class="proj-metric">Edge AI · Voice-controlled</div>
-      <div class="proj-tags">
-        <span class="proj-tag">Python</span><span class="proj-tag">Voice Recognition</span><span class="proj-tag">IR Sensors</span><span class="proj-tag">Edge AI</span>
-      </div>
+    <div class="proj-card body fade" onclick="showDetail('body')">
+      <div class="proj-hd"><div class="proj-icon">📐</div><span class="proj-badge badge-ml">Computer Vision</span></div>
+      <div class="proj-title">3D Body Measurement via CNN</div>
+      <div class="proj-desc">End-to-end deep learning pipeline estimating precise human body measurements from a single 2D image using pose estimation CNNs — deployed as a FastAPI REST endpoint for retail.</div>
+      <div class="proj-metric">Single-image 3D estimation · FastAPI deployed</div>
+      <div class="proj-tags"><span class="proj-tag">CNN</span><span class="proj-tag">Pose Estimation</span><span class="proj-tag">TensorFlow</span><span class="proj-tag">OpenCV</span><span class="proj-tag">FastAPI</span></div>
+      <div class="proj-cta">View full details →</div>
+    </div>
+
+    <div class="proj-card v2v fade" onclick="showDetail('v2v')">
+      <div class="proj-hd"><div class="proj-icon">📡</div><span class="proj-badge badge-iot">Embedded / IoT</span></div>
+      <div class="proj-title">V2V Collision Avoidance</div>
+      <div class="proj-desc">Real-time vehicle-to-vehicle wireless safety framework using Python and ESP32/NRF24L01 hardware for autonomous collision alerts between distributed nodes.</div>
+      <div class="proj-metric">Real-time · Sub-50ms latency · ESP32</div>
+      <div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">ESP32</span><span class="proj-tag">NRF24L01</span><span class="proj-tag">Distributed</span></div>
+      <div class="proj-cta">View full details →</div>
     </div>
 
   </div>
@@ -464,91 +389,69 @@
 
 <!-- SKILLS -->
 <section id="skills">
-  <div class="section-label">Technical Skills</div>
+  <div class="sec-label">Technical Skills</div>
   <h2>What I Work With</h2>
-  <p class="section-desc">Tools and technologies I use to build production-grade AI systems.</p>
-
+  <p class="sec-desc">Tools and technologies I use to build production-grade AI systems.</p>
   <div class="skills-grid">
-    <div class="skill-group fade-up">
-      <div class="skill-group-title">Languages</div>
-      <div class="skill-item"><span class="skill-name">Python</span><div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">JavaScript</span><div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Java</span><div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">SQL</span><div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div></div>
+    <div class="skill-grp fade">
+      <div class="skill-grp-ttl">Languages</div>
+      <div class="skill-row"><span class="skill-nm">Python</span><div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div></div>
+      <div class="skill-row"><span class="skill-nm">JavaScript</span><div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div></div>
+      <div class="skill-row"><span class="skill-nm">Java</span><div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div></div>
+      <div class="skill-row"><span class="skill-nm">SQL</span><div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div></div>
     </div>
-    <div class="skill-group fade-up">
-      <div class="skill-group-title">ML / DL</div>
-      <div class="skill-item"><span class="skill-name">PyTorch</span><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">YOLOv8</span><div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">TensorFlow</span><div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">scikit-learn</span><div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div></div>
+    <div class="skill-grp fade">
+      <div class="skill-grp-ttl">ML / DL</div>
+      <div class="skill-row"><span class="skill-nm">PyTorch</span><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
+      <div class="skill-row"><span class="skill-nm">YOLOv8</span><div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div></div>
+      <div class="skill-row"><span class="skill-nm">TensorFlow</span><div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div></div>
+      <div class="skill-row"><span class="skill-nm">scikit-learn</span><div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div></div>
     </div>
-    <div class="skill-group fade-up">
-      <div class="skill-group-title">Tools & Frameworks</div>
-      <div class="skill-item"><span class="skill-name">OpenCV</span><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Streamlit</span><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">FastAPI/Flask</span><div class="skill-bar"><div class="skill-fill" style="width:72%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Git</span><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+    <div class="skill-grp fade">
+      <div class="skill-grp-ttl">Tools & Frameworks</div>
+      <div class="skill-row"><span class="skill-nm">OpenCV</span><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+      <div class="skill-row"><span class="skill-nm">FastAPI / Flask</span><div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div></div>
+      <div class="skill-row"><span class="skill-nm">Streamlit</span><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
+      <div class="skill-row"><span class="skill-nm">Git</span><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
     </div>
-    <div class="skill-group fade-up">
-      <div class="skill-group-title">Embedded & Hardware</div>
-      <div class="skill-item"><span class="skill-name">ESP32</span><div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">NRF24L01</span><div class="skill-bar"><div class="skill-fill" style="width:72%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">Edge AI</span><div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div></div>
-      <div class="skill-item"><span class="skill-name">EEG / CSP</span><div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div></div>
+    <div class="skill-grp fade">
+      <div class="skill-grp-ttl">Embedded & APIs</div>
+      <div class="skill-row"><span class="skill-nm">ESP32</span><div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div></div>
+      <div class="skill-row"><span class="skill-nm">Gemini API</span><div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div></div>
+      <div class="skill-row"><span class="skill-nm">Edge AI</span><div class="skill-bar"><div class="skill-fill" style="width:72%"></div></div></div>
+      <div class="skill-row"><span class="skill-nm">EEG / CSP</span><div class="skill-bar"><div class="skill-fill" style="width:76%"></div></div></div>
     </div>
   </div>
 </section>
 
 <!-- EXPERIENCE -->
 <section id="experience">
-  <div class="section-label">Career</div>
+  <div class="sec-label">Career</div>
   <h2>Experience</h2>
-  <p class="section-desc">Hands-on internships building real production-grade AI systems.</p>
-
+  <p class="sec-desc">Hands-on internships building real production-grade AI systems.</p>
   <div class="timeline">
-    <div class="timeline-item fade-up">
-      <div class="timeline-dot"></div>
-      <div class="tl-header">
-        <div>
-          <div class="tl-title">AI/ML Intern</div>
-          <div class="tl-company">Infosys Springboard</div>
-        </div>
-        <div class="tl-date">Nov 2025 – Jan 2026</div>
-      </div>
-      <ul class="tl-bullets">
-        <li>Built hybrid YOLOv8 pipeline for PCB defect detection — 96.5% accuracy on 10,000+ image dataset.</li>
-        <li>Deployed real-time Streamlit diagnostic dashboard, reducing manual inspection time by ~40%.</li>
-        <li>Optimized inference using model quantization and preprocessing pipelines for edge performance.</li>
+    <div class="tl-item fade">
+      <div class="tl-dot"></div>
+      <div class="tl-hd"><div><div class="tl-ttl">AI/ML Intern</div><div class="tl-co">Infosys Springboard</div></div><div class="tl-date">Nov 2025 – Jan 2026</div></div>
+      <ul class="tl-list">
+        <li>Architected YOLOv8 defect detection pipeline — 96.5% accuracy on 10K PCB image dataset.</li>
+        <li>Deployed real-time Streamlit dashboard, reducing manual inspection effort by ~40%.</li>
+        <li>Optimized edge inference via model quantization for embedded deployment.</li>
       </ul>
     </div>
-
-    <div class="timeline-item fade-up">
-      <div class="timeline-dot"></div>
-      <div class="tl-header">
-        <div>
-          <div class="tl-title">AI/ML Intern</div>
-          <div class="tl-company">Pantech Solutions</div>
-        </div>
-        <div class="tl-date">May 2023 – Jul 2023</div>
-      </div>
-      <ul class="tl-bullets">
-        <li>Developed supervised ML models on real-world datasets; improved F1-score by 12% via feature engineering.</li>
-        <li>Strengthened skills in SDLC, collaborative Git workflows, and debugging production Python code.</li>
+    <div class="tl-item fade">
+      <div class="tl-dot"></div>
+      <div class="tl-hd"><div><div class="tl-ttl">AI/ML Intern</div><div class="tl-co">Pantech Solutions</div></div><div class="tl-date">May 2023 – Jul 2023</div></div>
+      <ul class="tl-list">
+        <li>Built supervised ML pipelines; improved F1-score by 12% via hyperparameter tuning.</li>
+        <li>Collaborated on code reviews; maintained documentation across team workflows.</li>
       </ul>
     </div>
-
-    <div class="timeline-item fade-up">
-      <div class="timeline-dot" style="background:#10b981; box-shadow:0 0 0 2px #10b981;"></div>
-      <div class="tl-header">
-        <div>
-          <div class="tl-title">B.E. (Hons) — AI & Machine Learning</div>
-          <div class="tl-company">Global Academy of Technology, VTU</div>
-        </div>
-        <div class="tl-date">Jul 2023 – May 2027</div>
-      </div>
-      <ul class="tl-bullets">
-        <li>Relevant coursework: Deep Learning, Computer Vision, NLP, Signal Processing, Embedded Systems.</li>
+    <div class="tl-item fade">
+      <div class="tl-dot" style="background:var(--green);box-shadow:0 0 0 2px var(--green);"></div>
+      <div class="tl-hd"><div><div class="tl-ttl">B.E. (Hons) AI & Machine Learning</div><div class="tl-co">Global Academy of Technology, VTU</div></div><div class="tl-date">Jul 2023 – May 2027</div></div>
+      <ul class="tl-list">
+        <li>Coursework: Deep Learning, Computer Vision, NLP, Signal Processing, Embedded Systems.</li>
         <li>Top 200 / 7,000+ — RBIH Financial Literacy Ideathon.</li>
       </ul>
     </div>
@@ -557,65 +460,486 @@
 
 <!-- ACHIEVEMENTS -->
 <section id="achievements">
-  <div class="section-label">Recognition</div>
+  <div class="sec-label">Recognition</div>
   <h2>Achievements</h2>
-  <p class="section-desc">National competitions, hackathons, and recognitions.</p>
-
+  <p class="sec-desc">National competitions, hackathons, and certifications.</p>
   <div class="ach-grid">
-    <div class="ach-card fade-up">
+    <div class="ach-card fade" onclick="showAch('isro')">
       <div class="ach-icon">🛸</div>
-      <div>
-        <div class="ach-title">ISRO Bharatiya Antariksh Hackathon 2025</div>
-        <div class="ach-sub">National participant — submitted space-tech innovation solution</div>
-      </div>
+      <div><div class="ach-ttl">ISRO Bharatiya Antariksh Hackathon 2025</div><div class="ach-sub">National participant — submitted space-tech innovation</div><div class="ach-cta">View details →</div></div>
     </div>
-    <div class="ach-card fade-up">
+    <div class="ach-card fade" onclick="showAch('crucible')">
       <div class="ach-icon">🏆</div>
-      <div>
-        <div class="ach-title">Tata Crucible Campus Quiz 2025</div>
-        <div class="ach-sub">Qualified Prelims Level 1 nationally — business & tech aptitude</div>
-      </div>
+      <div><div class="ach-ttl">Tata Crucible Campus Quiz 2025</div><div class="ach-sub">Qualified Prelims Level 1 — national tech & business</div><div class="ach-cta">View details →</div></div>
     </div>
-    <div class="ach-card fade-up">
+    <div class="ach-card fade" onclick="showAch('rbih')">
       <div class="ach-icon">🏦</div>
-      <div>
-        <div class="ach-title">RBIH Financial Literacy Ideathon</div>
-        <div class="ach-sub">Top 200 out of 7,000+ applicants — Reserve Bank Innovation Hub</div>
-      </div>
+      <div><div class="ach-ttl">RBIH Financial Literacy Ideathon</div><div class="ach-sub">Top 200 out of 7,000+ applicants nationwide</div><div class="ach-cta">View details →</div></div>
     </div>
-    <div class="ach-card fade-up">
+    <div class="ach-card fade" onclick="showAch('vtu')">
       <div class="ach-icon">🎯</div>
-      <div>
-        <div class="ach-title">24th VTU Youth Fest 2025</div>
-        <div class="ach-sub">Core Organising Committee — coordinated 5,000+ student event</div>
-      </div>
+      <div><div class="ach-ttl">24th VTU Youth Fest 2025</div><div class="ach-sub">Core Organising Committee — 5,000+ attendees</div><div class="ach-cta">View details →</div></div>
+    </div>
+    <div class="ach-card fade" onclick="showAch('googlecloud')">
+      <div class="ach-icon">☁️</div>
+      <div><div class="ach-ttl">Agentic AI Day — Google Cloud</div><div class="ach-sub">Participation certificate from Google Cloud</div><div class="ach-cta">View details →</div></div>
+    </div>
+    <div class="ach-card fade" onclick="showAch('ieee')">
+      <div class="ach-icon">📄</div>
+      <div><div class="ach-ttl">IEEE InC4 2026 — Research Paper</div><div class="ach-sub">EEG BCI paper submitted · May 17, 2026</div><div class="ach-cta">View details →</div></div>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="section-label">Say Hello</div>
+  <div class="sec-label">Say Hello</div>
   <h2>Get In Touch</h2>
   <p class="contact-sub">Open to internships, research collaborations, and full-time roles at ISRO, Indian Army tech, and top tech companies.</p>
   <div class="contact-links">
-    <a href="mailto:Vinayakas307@gmail.com" class="contact-btn">✉️ Email Me</a>
-    <a href="https://github.com/Vinayakashiva" target="_blank" class="contact-btn">⌥ GitHub</a>
-    <a href="tel:+917022656317" class="contact-btn">📞 Call</a>
+    <a href="mailto:vinayakas307@gmail.com" class="c-btn">✉️ Email Me</a>
+    <a href="https://github.com/Vinayakashiva" target="_blank" class="c-btn">⌥ GitHub</a>
+    <a href="tel:+917022656317" class="c-btn">📞 +91 7022 656 317</a>
   </div>
 </section>
+<footer>Built by Vinayaka S · AI/ML Engineer · Bengaluru, India · 2026</footer>
+</div><!-- /page-main -->
 
-<footer>Built by Vinayaka S · AI/ML Engineer · Bengaluru, India · 2025</footer>
 
+<!-- ═══════════════════════ DETAIL PAGES ═══════════════════════ -->
+
+<!-- EEG BCI -->
+<div class="page" id="page-eeg">
+<div class="detail-page">
+  <div class="detail-hero">
+    <div class="detail-breadcrumb">Projects / <span>EEG Brain-Computer Interface</span></div>
+    <div class="detail-title">Secure AI-Powered EEG-Based<br/>Brain-Computer Interface</div>
+    <div class="detail-meta">
+      <span class="detail-chip">Python</span><span class="detail-chip">MNE-Python</span><span class="detail-chip">scikit-learn</span><span class="detail-chip">SciPy</span><span class="detail-chip">Streamlit</span><span class="detail-chip">AES Encryption</span>
+    </div>
+    <div style="font-size:.88rem;color:var(--muted);">Research paper submitted to <strong style="color:var(--blue);">IEEE InC4 2026</strong> · May 17, 2026</div>
+  </div>
+  <div class="detail-body">
+    <div class="stat-row">
+      <div class="stat-box"><div class="v">61.6%</div><div class="l">Mean Balanced Accuracy</div></div>
+      <div class="stat-box"><div class="v">p&lt;0.0001</div><div class="l">Statistical Significance</div></div>
+      <div class="stat-box"><div class="v">15</div><div class="l">EEG Subjects</div></div>
+      <div class="stat-box"><div class="v">64-ch</div><div class="l">EEG Channels</div></div>
+      <div class="stat-box"><div class="v">11%</div><div class="l">Plagiarism Score</div></div>
+    </div>
+
+    <h3>Overview</h3>
+    <p>Architected a secure, AI-powered Brain-Computer Interface that decodes <strong>imagined speech</strong> (Bilabial vs. Non-Bilabial phonemes) from 64-channel EEG signals across 15 subjects. The system targets assistive communication for individuals with severe motor or vocal impairments — translating silent thoughts into text without any physical movement.</p>
+
+    <div class="detail-media">
+      <div class="img-grid">
+        <div class="img-box"><div class="emoji">🧠</div><div class="lbl">EEG Pipeline Architecture</div></div>
+        <div class="img-box"><div class="emoji">📊</div><div class="lbl">CSP Spatial Filter Visualization</div></div>
+        <div class="img-box"><div class="emoji">🖥️</div><div class="lbl">Real-time Streamlit Dashboard</div></div>
+        <div class="img-box"><div class="emoji">📈</div><div class="lbl">Per-Subject Accuracy Chart</div></div>
+      </div>
+    </div>
+
+    <h3>The ML Pipeline</h3>
+    <ul>
+      <li><strong>EEG Acquisition:</strong> 64-channel non-invasive cap at 256 Hz, 3.1s epochs per trial across 15 subjects.</li>
+      <li><strong>Artifact Rejection:</strong> Automated ±800 μV peak-to-peak threshold — retaining 98.7% of viable cortical data.</li>
+      <li><strong>Common Average Reference (CAR):</strong> Subtracted spatial mean to remove amplifier drift and powerline interference.</li>
+      <li><strong>Adaptive Epoch Windowing:</strong> Subject-specific Early/Standard/Late windows with Hanning taper to eliminate spectral leakage.</li>
+      <li><strong>5-Band Butterworth Decomposition:</strong> Theta (4–8 Hz), Mu (8–12 Hz), Beta 1 (12–20 Hz), Beta 2 (20–30 Hz), Gamma (30–50 Hz).</li>
+      <li><strong>CSP with OAS Regularization:</strong> Compressed 64 channels → 4 spatial components per band → 20D log-variance feature vectors.</li>
+      <li><strong>LinearSVC Classifier:</strong> Zero-leakage StandardScaler + balanced class weights → 61.6% mean balanced accuracy (t=8.435, p&lt;0.0001).</li>
+    </ul>
+
+    <h3>Security & Dashboard</h3>
+    <p>Integrated <strong>AES end-to-end encryption</strong>, user authentication, and complete subject anonymization for neural data privacy. Built a real-time <strong>Streamlit simulation dashboard</strong> with live 8-channel EEG waveforms, pipeline stage tracker, log-variance bar charts, and an SVM decision-confidence dial.</p>
+
+    <h3>Research Impact</h3>
+    <p>The research paper covering this full architecture was officially <strong>submitted to the 2026 IEEE International Conference on Contemporary Computing and Communications (InC4)</strong> on May 17, 2026. DrillBit plagiarism score: 11% (Grade B — Upgrade).</p>
+
+    <button class="back-btn" onclick="showMain()">← Back to Portfolio</button>
+  </div>
+</div>
+</div>
+
+<!-- PCB -->
+<div class="page" id="page-pcb">
+<div class="detail-page">
+  <div class="detail-hero">
+    <div class="detail-breadcrumb">Projects / <span>PCB Defect Detection</span></div>
+    <div class="detail-title">PCB Defect Detection System<br/><span style="font-size:1.4rem;font-weight:600;color:var(--blue);">@ Infosys Springboard</span></div>
+    <div class="detail-meta">
+      <span class="detail-chip">YOLOv8</span><span class="detail-chip">FastAPI</span><span class="detail-chip">Streamlit</span><span class="detail-chip">PyTorch</span><span class="detail-chip">OpenCV</span><span class="detail-chip">Model Quantization</span>
+    </div>
+  </div>
+  <div class="detail-body">
+    <div class="stat-row">
+      <div class="stat-box"><div class="v">96.5%</div><div class="l">Detection Accuracy</div></div>
+      <div class="stat-box"><div class="v">10K+</div><div class="l">Training Images</div></div>
+      <div class="stat-box"><div class="v">~40%</div><div class="l">Inspection Time Saved</div></div>
+      <div class="stat-box"><div class="v">Real-time</div><div class="l">Live Dashboard</div></div>
+    </div>
+    <h3>Overview</h3>
+    <p>Architected a <strong>full-stack defect detection system</strong> for industrial PCB quality inspection during a 3-month sprint at Infosys Springboard. The Python OOP backend powered by <strong>YOLOv8 + FastAPI</strong> combined with a real-time Streamlit dashboard trained on 10,000+ PCB images — achieving 96.5% accuracy.</p>
+
+    <div class="detail-media">
+      <div class="img-grid">
+        <div class="img-box"><div class="emoji">🔍</div><div class="lbl">YOLOv8 Detection Output</div></div>
+        <div class="img-box"><div class="emoji">📊</div><div class="lbl">Streamlit Live Dashboard</div></div>
+        <div class="img-box"><div class="emoji">🖥️</div><div class="lbl">System Architecture</div></div>
+        <div class="img-box"><div class="emoji">⚡</div><div class="lbl">Edge Inference Pipeline</div></div>
+      </div>
+    </div>
+
+    <h3>Key Contributions</h3>
+    <ul>
+      <li>Architected full-stack defect detection: Python OOP backend (YOLOv8 + FastAPI) + real-time Streamlit dashboard trained on 10K PCB images — achieving <strong>96.5% accuracy</strong>.</li>
+      <li>Reduced manual inspection effort by <strong>~40%</strong> after iterating on product design through structured stakeholder feedback cycles across a 3-month sprint.</li>
+      <li>Optimized edge inference via <strong>model quantization</strong> and custom preprocessing pipelines, achieving near real-time latency for embedded deployment.</li>
+      <li>Practiced <strong>modular OOP design</strong> with maintainable, testable components reused across pipeline stages.</li>
+    </ul>
+    <button class="back-btn" onclick="showMain()">← Back to Portfolio</button>
+  </div>
+</div>
+</div>
+
+<!-- SANJU -->
+<div class="page" id="page-sanju">
+<div class="detail-page">
+  <div class="detail-hero">
+    <div class="detail-breadcrumb">Projects / <span>Sanju AI Desktop Assistant</span></div>
+    <div class="detail-title">Sanju — AI Desktop<br/>Voice Assistant</div>
+    <div class="detail-meta">
+      <span class="detail-chip">Python</span><span class="detail-chip">Gemini API</span><span class="detail-chip">PyQt6</span><span class="detail-chip">Edge TTS</span><span class="detail-chip">PyAutoGUI</span><span class="detail-chip">SpeechRecognition</span>
+    </div>
+    <div style="font-size:.88rem;color:var(--muted);">Built entirely with <strong style="color:var(--blue);">free APIs</strong> — Google Gemini, Edge TTS, Google Speech Recognition</div>
+  </div>
+  <div class="detail-body">
+    <h3>Overview</h3>
+    <p>Sanju is a fully local, voice-activated AI desktop assistant that can <strong>write Python code directly into open files</strong>, launch and control applications, search the web, and hold natural conversations with <strong>persistent memory</strong> across sessions. Built entirely on free APIs — Google Gemini for intelligence, Edge TTS for voice, and Google Speech Recognition for wake-word detection.</p>
+
+    <div class="detail-media">
+      <div class="video-placeholder" onclick="alert('Demo video — add your recording here!')">
+        <div class="play-btn">▶</div>
+        <div class="video-label">Sanju Demo Video — Click to Play</div>
+      </div>
+    </div>
+
+    <div class="img-grid" style="margin-top:1.2rem;">
+      <div class="img-box"><div class="emoji">🎤</div><div class="lbl">Wake Word Detection UI</div></div>
+      <div class="img-box"><div class="emoji">💻</div><div class="lbl">Code Writing to PyCharm</div></div>
+      <div class="img-box"><div class="emoji">🌐</div><div class="lbl">Browser Search Automation</div></div>
+      <div class="img-box"><div class="emoji">🧠</div><div class="lbl">Persistent Memory JSON</div></div>
+    </div>
+
+    <h3>Core Capabilities</h3>
+    <ul>
+      <li><strong>Code Writing:</strong> Sanju listens to your instructions and types Python code directly into your open PyCharm or editor window using PyAutoGUI clipboard injection.</li>
+      <li><strong>App Control:</strong> Opens Chrome, Spotify, VS Code, Discord, WhatsApp, File Explorer, and 20+ apps via voice commands like "Open Chrome" or "Launch Spotify".</li>
+      <li><strong>Browser Search:</strong> Interprets natural language queries and opens the browser to search — "Sanju, search for machine learning tutorials".</li>
+      <li><strong>Persistent Memory:</strong> All conversations are saved to <code>sanju_memory.json</code> and injected into the next session, so Sanju remembers previous context across reboots.</li>
+      <li><strong>Emotion Detection:</strong> Detects emotional tone of responses (teasing, loving, happy, shy) and switches animated GIF states accordingly on the transparent floating UI.</li>
+    </ul>
+
+    <h3>Technical Architecture</h3>
+    <ul>
+      <li><strong>AI Engine:</strong> Google Gemini API (gemini-3-flash-preview) with custom system prompt, streaming responses, and conversation history management.</li>
+      <li><strong>Audio Engine:</strong> PyAudio + SpeechRecognition for wake-word ("Hey Sanju") detection → Google STT for command recognition → Edge TTS (Emma Neural voice) for real-time speech synthesis.</li>
+      <li><strong>UI:</strong> PyQt6 frameless, always-on-top, transparent window in the bottom-right corner displaying animated GIFs for each state (idle, listening, thinking, speaking).</li>
+      <li><strong>App Controller:</strong> PyAutoGUI + pygetwindow for window management; pyperclip for clipboard-based code injection into editors.</li>
+    </ul>
+
+    <h3>Voice Commands</h3>
+    <ul>
+      <li>"Sanju" / "Hey Sanju" → Wake up</li>
+      <li>"Write a Flask login page" → Types code into active Python file</li>
+      <li>"Open Chrome" / "Launch VS Code" → Opens the app</li>
+      <li>"Search for [query]" → Opens browser with search</li>
+      <li>Any question → Answered by Gemini AI with voice response</li>
+    </ul>
+    <button class="back-btn" onclick="showMain()">← Back to Portfolio</button>
+  </div>
+</div>
+</div>
+
+<!-- MOON -->
+<div class="page" id="page-moon">
+<div class="detail-page">
+  <div class="detail-hero">
+    <div class="detail-breadcrumb">Projects / <span>Lunar Noise Cancellation</span></div>
+    <div class="detail-title">Lunar Dark Area Noise<br/>Cancellation System</div>
+    <div class="detail-meta">
+      <span class="detail-chip">Python</span><span class="detail-chip">OpenCV</span><span class="detail-chip">CNNs</span><span class="detail-chip">NumPy</span><span class="detail-chip">Image Processing</span>
+    </div>
+    <div style="font-size:.88rem;color:var(--muted);">Submitted for <strong style="color:var(--blue);">Smart India Hackathon (SIH)</strong> — ISRO lunar exploration data pipeline</div>
+  </div>
+  <div class="detail-body">
+    <h3>Overview</h3>
+    <p>Architected a deep image processing system for <strong>noise cancellation in dark lunar surface imagery</strong> — submitted for Smart India Hackathon to support ISRO's lunar exploration missions. The system targets a critical problem in space imaging: lunar craters and polar regions are extremely dark, making surface feature extraction nearly impossible with standard imaging techniques.</p>
+
+    <div class="detail-media">
+      <div class="img-grid">
+        <div class="img-box"><div class="emoji">🌙</div><div class="lbl">Raw Lunar Dark Area Image</div></div>
+        <div class="img-box"><div class="emoji">✨</div><div class="lbl">Enhanced Output</div></div>
+        <div class="img-box"><div class="emoji">🔬</div><div class="lbl">Noise Analysis Heatmap</div></div>
+        <div class="img-box"><div class="emoji">📡</div><div class="lbl">ISRO Data Pipeline Integration</div></div>
+      </div>
+    </div>
+
+    <h3>Problem Statement</h3>
+    <p>Lunar permanently shadowed regions (PSRs) near the poles are scientifically critical — they may contain water ice — but standard cameras cannot capture detail in near-complete darkness. Images from ISRO's lunar missions contain extreme noise, shadow artifacts, and low-SNR regions that block scientific analysis.</p>
+
+    <h3>Approach</h3>
+    <ul>
+      <li><strong>Multi-stage Denoising Pipeline:</strong> Combined classical OpenCV techniques (bilateral filtering, CLAHE histogram equalization) with learned CNN-based enhancement to progressively recover shadow detail.</li>
+      <li><strong>Adaptive Enhancement:</strong> Applied region-adaptive processing — detecting dark zones automatically and applying stronger enhancement locally without overexposing illuminated areas.</li>
+      <li><strong>CNN Super-Resolution:</strong> Used a lightweight CNN to upscale and sharpen recovered regions while suppressing sensor noise common in space imaging conditions.</li>
+      <li><strong>Output:</strong> Enhanced grayscale and false-color images with recovered surface texture, submitted as part of the SIH solution deck for ISRO problem statement evaluation.</li>
+    </ul>
+
+    <h3>Relevance to ISRO</h3>
+    <p>This directly addresses imaging challenges faced during <strong>Chandrayaan missions</strong>. Enhanced dark-area imagery improves crater mapping, ice detection, and safe landing zone identification for future lunar landers.</p>
+    <button class="back-btn" onclick="showMain()">← Back to Portfolio</button>
+  </div>
+</div>
+</div>
+
+<!-- BODY -->
+<div class="page" id="page-body">
+<div class="detail-page">
+  <div class="detail-hero">
+    <div class="detail-breadcrumb">Projects / <span>3D Body Measurement</span></div>
+    <div class="detail-title">3D Body Measurement<br/>via CNN</div>
+    <div class="detail-meta">
+      <span class="detail-chip">Python</span><span class="detail-chip">TensorFlow</span><span class="detail-chip">OpenCV</span><span class="detail-chip">FastAPI</span><span class="detail-chip">Pose Estimation</span><span class="detail-chip">REST API</span>
+    </div>
+  </div>
+  <div class="detail-body">
+    <h3>Overview</h3>
+    <p>Architected an end-to-end deep learning pipeline estimating precise human body measurements from a <strong>single 2D image</strong> using pose estimation CNNs — packaged as a production-ready REST API with FastAPI for retail and fashion applications (virtual try-on, size recommendation).</p>
+
+    <div class="detail-media">
+      <div class="img-grid">
+        <div class="img-box"><div class="emoji">🧍</div><div class="lbl">Pose Keypoint Extraction</div></div>
+        <div class="img-box"><div class="emoji">📐</div><div class="lbl">3D Measurement Output</div></div>
+        <div class="img-box"><div class="emoji">⚡</div><div class="lbl">FastAPI Endpoint</div></div>
+        <div class="img-box"><div class="emoji">👗</div><div class="lbl">Retail Application Demo</div></div>
+      </div>
+    </div>
+
+    <h3>Pipeline</h3>
+    <ul>
+      <li><strong>Overview:</strong> Architected an end-to-end deep learning pipeline that estimates precise human body measurements from a single 2D image using pose estimation CNNs — deployed as a production-ready REST API for retail use.</li>
+      <li>Designed modular <strong>OOP pipeline stages</strong> for pose keypoint extraction, geometric feature computation, and regression model inference — enabling scalable, reusable components across body regions.</li>
+      <li>Deployed as a <strong>FastAPI REST endpoint</strong> enabling real-time inference integration for downstream retail applications with low-latency response.</li>
+    </ul>
+    <button class="back-btn" onclick="showMain()">← Back to Portfolio</button>
+  </div>
+</div>
+</div>
+
+<!-- V2V -->
+<div class="page" id="page-v2v">
+<div class="detail-page">
+  <div class="detail-hero">
+    <div class="detail-breadcrumb">Projects / <span>V2V Collision Avoidance</span></div>
+    <div class="detail-title">V2V Collision Avoidance<br/>System</div>
+    <div class="detail-meta">
+      <span class="detail-chip">Python</span><span class="detail-chip">ESP32</span><span class="detail-chip">NRF24L01</span><span class="detail-chip">Distributed Systems</span>
+    </div>
+  </div>
+  <div class="detail-body">
+    <h3>Overview</h3>
+    <p>Built a real-time vehicle-to-vehicle safety framework with a custom <strong>distributed communication protocol</strong> for autonomous collision avoidance alerts on ESP32/NRF24L01 hardware — demonstrating fault-tolerant hardware-software co-design under real-time constraints.</p>
+
+    <div class="detail-media">
+      <div class="img-grid">
+        <div class="img-box"><div class="emoji">📡</div><div class="lbl">NRF24L01 Wireless Link</div></div>
+        <div class="img-box"><div class="emoji">🚗</div><div class="lbl">V2V Alert Simulation</div></div>
+      </div>
+    </div>
+
+    <h3>Technical Details</h3>
+    <ul>
+      <li>Custom wireless protocol on ESP32 + NRF24L01 for sub-50ms alert latency between vehicle nodes.</li>
+      <li>Fault-tolerant design with automatic retransmission and node dropout recovery.</li>
+      <li>Python-based simulation layer for protocol testing before hardware flashing.</li>
+    </ul>
+    <button class="back-btn" onclick="showMain()">← Back to Portfolio</button>
+  </div>
+</div>
+</div>
+
+
+<!-- ═══════════════════════ ACHIEVEMENT PAGES ═══════════════════════ -->
+
+<!-- ISRO -->
+<div class="page" id="page-ach-isro">
+<div class="detail-page">
+  <div class="ach-detail-hero">
+    <div class="detail-breadcrumb">Achievements / <span>ISRO Hackathon</span></div>
+    <div class="ach-badge-big">🛸</div>
+    <div class="detail-title">ISRO Bharatiya Antariksh<br/>Hackathon 2025</div>
+    <div style="font-size:.95rem;color:var(--muted);margin-top:.5rem;">National Participant — Space-Tech Innovation</div>
+  </div>
+  <div class="detail-body">
+    <div class="detail-media">
+      <div class="media-placeholder tall"><div class="media-icon">🛸</div><div class="media-label">Participation Certificate — ISRO BAH 2025</div></div>
+    </div>
+    <h3>About</h3>
+    <p>Selected as a national participant in the <strong>ISRO Bharatiya Antariksh Hackathon 2025</strong> — one of India's most prestigious space-tech competitions organised by the Indian Space Research Organisation. Submitted a space-tech innovation solution evaluated from thousands of entries across the country.</p>
+    <h3>My Contribution</h3>
+    <p>Submitted the <strong>Lunar Dark Area Noise Cancellation</strong> project — a deep image processing system to enhance low-light lunar surface imagery for ISRO's Chandrayaan data pipelines. The solution addressed permanently shadowed regions on the Moon that contain potential water ice deposits.</p>
+    <button class="back-btn" onclick="showMain()">← Back to Portfolio</button>
+  </div>
+</div>
+</div>
+
+<!-- CRUCIBLE -->
+<div class="page" id="page-ach-crucible">
+<div class="detail-page">
+  <div class="ach-detail-hero">
+    <div class="detail-breadcrumb">Achievements / <span>Tata Crucible</span></div>
+    <div class="ach-badge-big">🏆</div>
+    <div class="detail-title">Tata Crucible Campus<br/>Quiz 2025</div>
+    <div style="font-size:.95rem;color:var(--muted);margin-top:.5rem;">Qualified Prelims Level 1 — National Competition</div>
+  </div>
+  <div class="detail-body">
+    <div class="detail-media">
+      <div class="media-placeholder"><div class="media-icon">🏆</div><div class="media-label">Tata Crucible Campus Quiz Certificate</div></div>
+    </div>
+    <h3>About</h3>
+    <p>Qualified the <strong>Prelims Level 1</strong> of the Tata Crucible Campus Quiz 2025 — India's largest and most prestigious national business and technology quiz competition. The competition tests deep knowledge across technology, business strategy, and general awareness at a national level.</p>
+    <button class="back-btn" onclick="showMain()">← Back to Portfolio</button>
+  </div>
+</div>
+</div>
+
+<!-- RBIH -->
+<div class="page" id="page-ach-rbih">
+<div class="detail-page">
+  <div class="ach-detail-hero">
+    <div class="detail-breadcrumb">Achievements / <span>RBIH Ideathon</span></div>
+    <div class="ach-badge-big">🏦</div>
+    <div class="detail-title">RBIH Financial Literacy<br/>Ideathon 2025</div>
+    <div style="font-size:.95rem;color:var(--muted);margin-top:.5rem;">Top 200 / 7,000+ Applicants — Reserve Bank Innovation Hub</div>
+  </div>
+  <div class="detail-body">
+    <div class="detail-media">
+      <div class="media-placeholder"><div class="media-icon">🏦</div><div class="media-label">RBIH Shortlist Certificate</div></div>
+    </div>
+    <h3>About</h3>
+    <p>Shortlisted in the <strong>Top 200 out of 7,000+ applicants nationwide</strong> for the Reserve Bank Innovation Hub (RBIH) Financial Literacy Ideathon — a national innovation competition focused on developing technology solutions to improve financial literacy across India.</p>
+    <button class="back-btn" onclick="showMain()">← Back to Portfolio</button>
+  </div>
+</div>
+</div>
+
+<!-- VTU -->
+<div class="page" id="page-ach-vtu">
+<div class="detail-page">
+  <div class="ach-detail-hero">
+    <div class="detail-breadcrumb">Achievements / <span>VTU Youth Fest</span></div>
+    <div class="ach-badge-big">🎯</div>
+    <div class="detail-title">24th VTU Youth Fest 2025<br/>Core Organising Committee</div>
+    <div style="font-size:.95rem;color:var(--muted);margin-top:.5rem;">5,000+ Attendees · Global Academy of Technology</div>
+  </div>
+  <div class="detail-body">
+    <div class="detail-media">
+      <div class="media-placeholder"><div class="media-icon">🎯</div><div class="media-label">VTU Youth Fest 2025 — Event Photos</div></div>
+    </div>
+    <h3>About</h3>
+    <p>Served on the <strong>Core Organising Committee</strong> for the 24th VTU Youth Fest 2025 held at Global Academy of Technology, Bengaluru. Managed logistics, event coordination, and team operations for a large-scale intercollegiate cultural and technical event attended by <strong>5,000+ students</strong>.</p>
+    <button class="back-btn" onclick="showMain()">← Back to Portfolio</button>
+  </div>
+</div>
+</div>
+
+<!-- GOOGLE CLOUD -->
+<div class="page" id="page-ach-googlecloud">
+<div class="detail-page">
+  <div class="ach-detail-hero">
+    <div class="detail-breadcrumb">Achievements / <span>Google Cloud Agentic AI Day</span></div>
+    <div class="ach-badge-big">☁️</div>
+    <div class="detail-title">Agentic AI Day<br/>Google Cloud</div>
+    <div style="font-size:.95rem;color:var(--muted);margin-top:.5rem;">Participation Certificate — Google Cloud</div>
+  </div>
+  <div class="detail-body">
+    <div class="detail-media">
+      <div class="media-placeholder tall"><div class="media-icon">☁️</div><div class="media-label">Google Cloud Agentic AI Day — Certificate</div></div>
+    </div>
+    <h3>About</h3>
+    <p>Participated in <strong>Agentic AI Day</strong> organised by Google Cloud — a specialised event focused on the frontier of agentic AI systems, including multi-agent architectures, autonomous reasoning pipelines, and production deployment of LLM-powered agents using Google Cloud infrastructure.</p>
+    <h3>Key Learnings</h3>
+    <ul>
+      <li>Agentic AI design patterns — planning, tool use, and memory in production systems.</li>
+      <li>Google Gemini API integration for intelligent agent workflows.</li>
+      <li>Multi-agent orchestration and safety considerations for autonomous AI.</li>
+    </ul>
+    <button class="back-btn" onclick="showMain()">← Back to Portfolio</button>
+  </div>
+</div>
+</div>
+
+<!-- IEEE -->
+<div class="page" id="page-ach-ieee">
+<div class="detail-page">
+  <div class="ach-detail-hero">
+    <div class="detail-breadcrumb">Achievements / <span>IEEE InC4 2026</span></div>
+    <div class="ach-badge-big">📄</div>
+    <div class="detail-title">IEEE InC4 2026<br/>Research Paper Submission</div>
+    <div style="font-size:.95rem;color:var(--muted);margin-top:.5rem;">Submitted May 17, 2026 · EEG Brain-Computer Interface</div>
+  </div>
+  <div class="detail-body">
+    <div class="detail-media">
+      <div class="media-placeholder"><div class="media-icon">📄</div><div class="media-label">IEEE InC4 2026 Submission Confirmation</div></div>
+    </div>
+    <h3>Paper Details</h3>
+    <p><strong>Title:</strong> "Secure AI-Powered EEG-Based Brain-Computer Interface For Speech Imagery Communication"</p>
+    <p><strong>Conference:</strong> 2026 IEEE International Conference on Contemporary Computing and Communications (InC4)</p>
+    <p><strong>Submitted:</strong> May 17, 2026</p>
+    <p><strong>Authors:</strong> Bhuvan A R, Chethan Ponnappa A, Vinayaka S · Global Academy of Technology, Bengaluru</p>
+    <p><strong>Plagiarism Score:</strong> 11% (DrillBit) — Grade B</p>
+    <h3>Abstract</h3>
+    <p>An EEG-based BCI that classifies imagined speech into two phonological categories using a robust ML pipeline with CSP spatial filtering, LinearSVC classification, and AES data security — achieving 61.6% mean balanced accuracy (p &lt; 0.0001) across 15 subjects.</p>
+    <button class="back-btn" onclick="showMain()">← Back to Portfolio</button>
+  </div>
+</div>
+</div>
+
+
+<!-- ═══════════════════════ SCRIPT ═══════════════════════ -->
 <script>
-const observer = new IntersectionObserver(entries => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('visible'), i * 80);
-    }
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+  const isMain = id === 'page-main';
+  document.getElementById('main-nav-links').style.display = isMain ? 'flex' : 'none';
+  document.getElementById('nav-back').style.display = isMain ? 'none' : 'flex';
+  if (!isMain) setTimeout(() => triggerFades(), 100);
+}
+
+function showMain() { showPage('page-main'); }
+function showDetail(key) { showPage('page-' + key); }
+function showAch(key) { showPage('page-ach-' + key); }
+
+function scrollTo(sel) {
+  const el = document.querySelector(sel);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
+function triggerFades() {
+  document.querySelectorAll('.page.active .fade').forEach((el, i) => {
+    setTimeout(() => el.classList.add('in'), i * 80);
   });
-}, { threshold: 0.1 });
-document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+}
+
+// Intersection observer for main page
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('#page-main .fade').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>
