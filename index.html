@@ -163,17 +163,19 @@ footer{background:#050810;color:rgba(255,255,255,.2);text-align:center;padding:1
 .stat-box .sl{font-size:.7rem;color:var(--muted);margin-top:3px;letter-spacing:.3px;text-transform:uppercase;}
 
 .img-quad{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin:1.5rem 0;}
-.img-cell{border-radius:10px;overflow:hidden;background:linear-gradient(135deg,#0e1225 0%,#1a2040 100%);min-height:180px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);flex-direction:column;gap:.5rem;}
-.img-cell img{width:100%;height:180px;object-fit:cover;border-radius:10px;}
+.img-cell{position:relative;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,#0e1225 0%,#1a2040 100%);min-height:180px;height:180px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);flex-direction:column;gap:.5rem;}
+.img-cell img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:10px;z-index:2;}
+.img-cell-ph{position:relative;display:flex;flex-direction:column;align-items:center;gap:.5rem;z-index:1;}
 .img-cell-icon{font-size:2rem;opacity:.25;}
 .img-cell-label{font-family:var(--mono);font-size:.65rem;color:rgba(255,255,255,.25);}
 .video-cell{border-radius:10px;background:linear-gradient(135deg,#0e1225 0%,#1a1830 100%);min-height:320px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);flex-direction:column;gap:1rem;cursor:pointer;transition:opacity .15s;}
 .video-cell:hover{opacity:.85;}
 .play-ring{width:64px;height:64px;border-radius:50%;background:rgba(35,86,255,.15);border:1.5px solid rgba(35,86,255,.35);display:flex;align-items:center;justify-content:center;font-size:1.5rem;}
 .video-label{font-family:var(--mono);font-size:.74rem;color:rgba(255,255,255,.4);}
-.media-holder{background:linear-gradient(135deg,#0e1225 0%,#1a2040 100%);border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:260px;border:1px solid var(--border);flex-direction:column;gap:.5rem;margin:1.5rem 0;}
+.media-holder{position:relative;background:linear-gradient(135deg,#0e1225 0%,#1a2040 100%);border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:260px;border:1px solid var(--border);flex-direction:column;gap:.5rem;margin:1.5rem 0;}
 .media-holder.tall{min-height:380px;}
-.media-holder img{width:100%;height:100%;object-fit:contain;}
+.media-holder img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:2;}
+.media-holder-ph{position:relative;display:flex;flex-direction:column;align-items:center;gap:.5rem;z-index:1;}
 .media-holder-icon{font-size:2.5rem;opacity:.2;}
 .media-holder-label{font-family:var(--mono);font-size:.68rem;color:rgba(255,255,255,.2);}
 .back-link{display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1.5px solid var(--border);color:var(--blue);border-radius:6px;padding:9px 16px;font-weight:700;font-size:.82rem;cursor:pointer;transition:all .15s;margin-top:2.5rem;text-decoration:none;font-family:var(--sans);}
@@ -331,10 +333,10 @@ footer{background:#050810;color:rgba(255,255,255,.2);text-align:center;padding:1
     <h3>Overview</h3>
     <p>Architected a secure, AI-powered Brain-Computer Interface that decodes <strong>imagined speech</strong> (Bilabial vs. Non-Bilabial phonemes) from 64-channel EEG signals across 15 subjects. The system targets assistive communication for individuals with severe motor or vocal impairments — translating silent thoughts into text without any physical movement.</p>
     <div class="img-quad">
-      <div class="img-cell"><img src="eeg_pipeline.png" onerror="this.style.display='none'"><div class="img-cell-icon">🧠</div><div class="img-cell-label">eeg_pipeline.png</div></div>
-      <div class="img-cell"><img src="eeg_csp.png" onerror="this.style.display='none'"><div class="img-cell-icon">📊</div><div class="img-cell-label">eeg_csp.png</div></div>
-      <div class="img-cell"><img src="eeg_dashboard.png" onerror="this.style.display='none'"><div class="img-cell-icon">🖥️</div><div class="img-cell-label">eeg_dashboard.png</div></div>
-      <div class="img-cell"><img src="eeg_accuracy.png" onerror="this.style.display='none'"><div class="img-cell-icon">📈</div><div class="img-cell-label">eeg_accuracy.png</div></div>
+      <div class="img-cell"><img src="eeg_pipeline.png" onerror="this.style.display='none'"><div class="img-cell-ph"><div class="img-cell-icon">🧠</div><div class="img-cell-label">eeg_pipeline.png</div></div></div>
+      <div class="img-cell"><img src="eeg_csp.png" onerror="this.style.display='none'"><div class="img-cell-ph"><div class="img-cell-icon">📊</div><div class="img-cell-label">eeg_csp.png</div></div></div>
+      <div class="img-cell"><img src="eeg_dashboard.png" onerror="this.style.display='none'"><div class="img-cell-ph"><div class="img-cell-icon">🖥️</div><div class="img-cell-label">eeg_dashboard.png</div></div></div>
+      <div class="img-cell"><img src="eeg_accuracy.png" onerror="this.style.display='none'"><div class="img-cell-ph"><div class="img-cell-icon">📈</div><div class="img-cell-label">eeg_accuracy.png</div></div></div>
     </div>
     <h3>The ML pipeline</h3>
     <ul>
@@ -371,10 +373,10 @@ footer{background:#050810;color:rgba(255,255,255,.2);text-align:center;padding:1
     <h3>Overview</h3>
     <p>Architected a <strong>full-stack defect detection system</strong> for industrial PCB quality inspection during a 3-month sprint at Infosys Springboard. Python OOP backend powered by <strong>YOLOv8 + FastAPI</strong> with a real-time Streamlit dashboard trained on 10,000+ PCB images — achieving 96.5% accuracy.</p>
     <div class="img-quad">
-      <div class="img-cell"><img src="pcb_detection.png" onerror="this.style.display='none'"><div class="img-cell-icon">🔍</div><div class="img-cell-label">pcb_detection.png</div></div>
-      <div class="img-cell"><img src="pcb_dashboard.png" onerror="this.style.display='none'"><div class="img-cell-icon">📊</div><div class="img-cell-label">pcb_dashboard.png</div></div>
-      <div class="img-cell"><img src="pcb_architecture.png" onerror="this.style.display='none'"><div class="img-cell-icon">🏗️</div><div class="img-cell-label">pcb_architecture.png</div></div>
-      <div class="img-cell"><img src="pcb_edge.png" onerror="this.style.display='none'"><div class="img-cell-icon">⚡</div><div class="img-cell-label">pcb_edge.png</div></div>
+      <div class="img-cell"><img src="pcb_detection.png" onerror="this.style.display='none'"><div class="img-cell-ph"><div class="img-cell-icon">🔍</div><div class="img-cell-label">pcb_detection.png</div></div></div>
+      <div class="img-cell"><img src="pcb_dashboard.png" onerror="this.style.display='none'"><div class="img-cell-ph"><div class="img-cell-icon">📊</div><div class="img-cell-label">pcb_dashboard.png</div></div></div>
+      <div class="img-cell"><img src="pcb_architecture.png" onerror="this.style.display='none'"><div class="img-cell-ph"><div class="img-cell-icon">🏗️</div><div class="img-cell-label">pcb_architecture.png</div></div></div>
+      <div class="img-cell"><img src="pcb_edge.png" onerror="this.style.display='none'"><div class="img-cell-ph"><div class="img-cell-icon">⚡</div><div class="img-cell-label">pcb_edge.png</div></div></div>
     </div>
     <h3>Key contributions</h3>
     <ul>
@@ -403,10 +405,10 @@ footer{background:#050810;color:rgba(255,255,255,.2);text-align:center;padding:1
       <div class="video-label">sanju_demo.mp4 — click to play</div>
     </div>
     <div class="img-quad" style="margin-top:1rem;">
-      <div class="img-cell"><img src="sanju_ui.png" onerror="this.style.display='none'"><div class="img-cell-icon">🎤</div><div class="img-cell-label">sanju_ui.png</div></div>
-      <div class="img-cell"><img src="sanju_code.png" onerror="this.style.display='none'"><div class="img-cell-icon">💻</div><div class="img-cell-label">sanju_code.png</div></div>
-      <div class="img-cell"><img src="sanju_search.png" onerror="this.style.display='none'"><div class="img-cell-icon">🌐</div><div class="img-cell-label">sanju_search.png</div></div>
-      <div class="img-cell"><img src="sanju_memory.png" onerror="this.style.display='none'"><div class="img-cell-icon">🧠</div><div class="img-cell-label">sanju_memory.png</div></div>
+      <div class="img-cell"><img src="sanju_ui.png" onerror="this.style.display='none'"><div class="img-cell-ph"><div class="img-cell-icon">🎤</div><div class="img-cell-label">sanju_ui.png</div></div></div>
+      <div class="img-cell"><img src="sanju_code.png" onerror="this.style.display='none'"><div class="img-cell-ph"><div class="img-cell-icon">💻</div><div class="img-cell-label">sanju_code.png</div></div></div>
+      <div class="img-cell"><img src="sanju_search.png" onerror="this.style.display='none'"><div class="img-cell-ph"><div class="img-cell-icon">🌐</div><div class="img-cell-label">sanju_search.png</div></div></div>
+      <div class="img-cell"><img src="sanju_memory.png" onerror="this.style.display='none'"><div class="img-cell-ph"><div class="img-cell-icon">🧠</div><div class="img-cell-label">sanju_memory.png</div></div></div>
     </div>
     <h3>Core capabilities</h3>
     <ul>
@@ -439,10 +441,10 @@ footer{background:#050810;color:rgba(255,255,255,.2);text-align:center;padding:1
     <h3>Overview</h3>
     <p>Architected a deep image processing system for <strong>noise cancellation in dark lunar surface imagery</strong> — submitted for Smart India Hackathon to support ISRO's lunar exploration missions.</p>
     <div class="img-quad">
-      <div class="img-cell"><img src="moon_raw.png" onerror="this.style.display='none'"><div class="img-cell-icon">🌙</div><div class="img-cell-label">moon_raw.png</div></div>
-      <div class="img-cell"><img src="moon_enhanced.png" onerror="this.style.display='none'"><div class="img-cell-icon">✨</div><div class="img-cell-label">moon_enhanced.png</div></div>
-      <div class="img-cell"><img src="moon_heatmap.png" onerror="this.style.display='none'"><div class="img-cell-icon">🔬</div><div class="img-cell-label">moon_heatmap.png</div></div>
-      <div class="img-cell"><img src="moon_pipeline.png" onerror="this.style.display='none'"><div class="img-cell-icon">📡</div><div class="img-cell-label">moon_pipeline.png</div></div>
+      <div class="img-cell"><img src="moon_raw.png" onerror="this.style.display='none'"><div class="img-cell-ph"><div class="img-cell-icon">🌙</div><div class="img-cell-label">moon_raw.png</div></div></div>
+      <div class="img-cell"><img src="moon_enhanced.png" onerror="this.style.display='none'"><div class="img-cell-ph"><div class="img-cell-icon">✨</div><div class="img-cell-label">moon_enhanced.png</div></div></div>
+      <div class="img-cell"><img src="moon_heatmap.png" onerror="this.style.display='none'"><div class="img-cell-ph"><div class="img-cell-icon">🔬</div><div class="img-cell-label">moon_heatmap.png</div></div></div>
+      <div class="img-cell"><img src="moon_pipeline.png" onerror="this.style.display='none'"><div class="img-cell-ph"><div class="img-cell-icon">📡</div><div class="img-cell-label">moon_pipeline.png</div></div></div>
     </div>
     <h3>Problem statement</h3>
     <p>Lunar permanently shadowed regions near the poles may contain water ice — but standard cameras cannot capture detail in near-complete darkness. Images contain extreme noise, shadow artifacts, and low-SNR regions that block scientific analysis.</p>
@@ -469,10 +471,10 @@ footer{background:#050810;color:rgba(255,255,255,.2);text-align:center;padding:1
     <h3>Overview</h3>
     <p>End-to-end deep learning pipeline estimating precise human body measurements from a <strong>single 2D image</strong> using pose estimation CNNs — packaged as a production-ready REST API for retail and fashion applications (virtual try-on, size recommendation).</p>
     <div class="img-quad">
-      <div class="img-cell"><img src="body_pose.png" onerror="this.style.display='none'"><div class="img-cell-icon">🧍</div><div class="img-cell-label">body_pose.png</div></div>
-      <div class="img-cell"><img src="body_output.png" onerror="this.style.display='none'"><div class="img-cell-icon">📐</div><div class="img-cell-label">body_output.png</div></div>
-      <div class="img-cell"><img src="body_api.png" onerror="this.style.display='none'"><div class="img-cell-icon">⚡</div><div class="img-cell-label">body_api.png</div></div>
-      <div class="img-cell"><img src="body_retail.png" onerror="this.style.display='none'"><div class="img-cell-icon">👗</div><div class="img-cell-label">body_retail.png</div></div>
+      <div class="img-cell"><img src="body_pose.png" onerror="this.style.display='none'"><div class="img-cell-ph"><div class="img-cell-icon">🧍</div><div class="img-cell-label">body_pose.png</div></div></div>
+      <div class="img-cell"><img src="body_output.png" onerror="this.style.display='none'"><div class="img-cell-ph"><div class="img-cell-icon">📐</div><div class="img-cell-label">body_output.png</div></div></div>
+      <div class="img-cell"><img src="body_api.png" onerror="this.style.display='none'"><div class="img-cell-ph"><div class="img-cell-icon">⚡</div><div class="img-cell-label">body_api.png</div></div></div>
+      <div class="img-cell"><img src="body_retail.png" onerror="this.style.display='none'"><div class="img-cell-ph"><div class="img-cell-icon">👗</div><div class="img-cell-label">body_retail.png</div></div></div>
     </div>
     <h3>Pipeline</h3>
     <ul>
@@ -495,8 +497,8 @@ footer{background:#050810;color:rgba(255,255,255,.2);text-align:center;padding:1
     <h3>Overview</h3>
     <p>Real-time vehicle-to-vehicle safety framework with a custom <strong>distributed communication protocol</strong> for autonomous collision avoidance alerts on ESP32/NRF24L01 hardware.</p>
     <div class="img-quad" style="grid-template-columns:1fr 1fr;">
-      <div class="img-cell"><img src="v2v_hardware.png" onerror="this.style.display='none'"><div class="img-cell-icon">📡</div><div class="img-cell-label">v2v_hardware.png</div></div>
-      <div class="img-cell"><img src="v2v_simulation.png" onerror="this.style.display='none'"><div class="img-cell-icon">🚗</div><div class="img-cell-label">v2v_simulation.png</div></div>
+      <div class="img-cell"><img src="v2v_hardware.png" onerror="this.style.display='none'"><div class="img-cell-ph"><div class="img-cell-icon">📡</div><div class="img-cell-label">v2v_hardware.png</div></div></div>
+      <div class="img-cell"><img src="v2v_simulation.png" onerror="this.style.display='none'"><div class="img-cell-ph"><div class="img-cell-icon">🚗</div><div class="img-cell-label">v2v_simulation.png</div></div></div>
     </div>
     <h3>Technical details</h3>
     <ul>
@@ -512,7 +514,7 @@ footer{background:#050810;color:rgba(255,255,255,.2);text-align:center;padding:1
 <div class="page" id="page-ach-isro"><div class="detail-page">
   <div class="ach-hero-section"><div class="breadcrumb">Achievements / <em>ISRO Hackathon</em></div><span class="ach-big-icon">🛸</span><div class="detail-title">ISRO Bharatiya Antariksh<br/>Hackathon 2025</div><div style="font-size:.9rem;color:var(--muted);margin-top:.4rem;">National Participant — Space-Tech Innovation</div></div>
   <div class="detail-body">
-    <div class="media-holder tall"><img src="cert_isro.png" onerror="this.style.display='none'"><div class="media-holder-icon">🛸</div><div class="media-holder-label">cert_isro.png</div></div>
+    <div class="media-holder tall"><img src="cert_isro.png" onerror="this.style.display='none'"><div class="media-holder-ph"><div class="media-holder-icon">🛸</div><div class="media-holder-label">cert_isro.png</div></div></div>
     <h3>About</h3>
     <p>Selected as a national participant in the <strong>ISRO Bharatiya Antariksh Hackathon 2025</strong> — one of India's most prestigious space-tech competitions. Submitted a space-tech innovation evaluated from thousands of entries across the country.</p>
     <h3>My contribution</h3>
@@ -525,7 +527,7 @@ footer{background:#050810;color:rgba(255,255,255,.2);text-align:center;padding:1
 <div class="page" id="page-ach-crucible"><div class="detail-page">
   <div class="ach-hero-section"><div class="breadcrumb">Achievements / <em>Tata Crucible</em></div><span class="ach-big-icon">🏆</span><div class="detail-title">Tata Crucible Campus<br/>Quiz 2025</div><div style="font-size:.9rem;color:var(--muted);margin-top:.4rem;">Qualified Prelims Level 1</div></div>
   <div class="detail-body">
-    <div class="media-holder"><img src="cert_crucible.png" onerror="this.style.display='none'"><div class="media-holder-icon">🏆</div><div class="media-holder-label">cert_crucible.png</div></div>
+    <div class="media-holder"><img src="cert_crucible.png" onerror="this.style.display='none'"><div class="media-holder-ph"><div class="media-holder-icon">🏆</div><div class="media-holder-label">cert_crucible.png</div></div></div>
     <h3>About</h3>
     <p>Qualified the <strong>Prelims Level 1</strong> of the Tata Crucible Campus Quiz 2025 — India's largest national business and technology quiz competition.</p>
     <button class="back-link" onclick="showMain()">← Back to portfolio</button>
@@ -536,7 +538,7 @@ footer{background:#050810;color:rgba(255,255,255,.2);text-align:center;padding:1
 <div class="page" id="page-ach-rbih"><div class="detail-page">
   <div class="ach-hero-section"><div class="breadcrumb">Achievements / <em>RBIH Ideathon</em></div><span class="ach-big-icon">🏦</span><div class="detail-title">RBIH Financial Literacy<br/>Ideathon 2025</div><div style="font-size:.9rem;color:var(--muted);margin-top:.4rem;">Top 200 / 7,000+ Applicants</div></div>
   <div class="detail-body">
-    <div class="media-holder"><img src="cert_rbih.png" onerror="this.style.display='none'"><div class="media-holder-icon">🏦</div><div class="media-holder-label">cert_rbih.png</div></div>
+    <div class="media-holder"><img src="cert_rbih.png" onerror="this.style.display='none'"><div class="media-holder-ph"><div class="media-holder-icon">🏦</div><div class="media-holder-label">cert_rbih.png</div></div></div>
     <h3>About</h3>
     <p>Shortlisted in the <strong>Top 200 out of 7,000+ applicants nationwide</strong> for the RBIH Financial Literacy Ideathon — focused on technology solutions to improve financial literacy across India.</p>
     <button class="back-link" onclick="showMain()">← Back to portfolio</button>
@@ -547,7 +549,7 @@ footer{background:#050810;color:rgba(255,255,255,.2);text-align:center;padding:1
 <div class="page" id="page-ach-vtu"><div class="detail-page">
   <div class="ach-hero-section"><div class="breadcrumb">Achievements / <em>VTU Youth Fest</em></div><span class="ach-big-icon">🎯</span><div class="detail-title">24th VTU Youth Fest 2025<br/>Core Organising Committee</div><div style="font-size:.9rem;color:var(--muted);margin-top:.4rem;">5,000+ Attendees</div></div>
   <div class="detail-body">
-    <div class="media-holder"><img src="cert_vtu.png" onerror="this.style.display='none'"><div class="media-holder-icon">🎯</div><div class="media-holder-label">cert_vtu.png</div></div>
+    <div class="media-holder"><img src="cert_vtu.png" onerror="this.style.display='none'"><div class="media-holder-ph"><div class="media-holder-icon">🎯</div><div class="media-holder-label">cert_vtu.png</div></div></div>
     <h3>About</h3>
     <p>Served on the <strong>Core Organising Committee</strong> for the 24th VTU Youth Fest 2025. Managed logistics and event coordination for an intercollegiate event attended by <strong>5,000+ students</strong>.</p>
     <button class="back-link" onclick="showMain()">← Back to portfolio</button>
@@ -558,7 +560,7 @@ footer{background:#050810;color:rgba(255,255,255,.2);text-align:center;padding:1
 <div class="page" id="page-ach-googlecloud"><div class="detail-page">
   <div class="ach-hero-section"><div class="breadcrumb">Achievements / <em>Google Cloud</em></div><span class="ach-big-icon">☁️</span><div class="detail-title">Agentic AI Day<br/>Google Cloud</div><div style="font-size:.9rem;color:var(--muted);margin-top:.4rem;">Participation Certificate</div></div>
   <div class="detail-body">
-    <div class="media-holder tall"><img src="cert_googlecloud.png" onerror="this.style.display='none'"><div class="media-holder-icon">☁️</div><div class="media-holder-label">cert_googlecloud.png</div></div>
+    <div class="media-holder tall"><img src="cert_googlecloud.png" onerror="this.style.display='none'"><div class="media-holder-ph"><div class="media-holder-icon">☁️</div><div class="media-holder-label">cert_googlecloud.png</div></div></div>
     <h3>About</h3>
     <p>Participated in <strong>Agentic AI Day</strong> organised by Google Cloud — focused on multi-agent architectures, autonomous reasoning pipelines, and production deployment of LLM-powered agents using Google Cloud infrastructure.</p>
     <h3>Key learnings</h3>
@@ -575,7 +577,7 @@ footer{background:#050810;color:rgba(255,255,255,.2);text-align:center;padding:1
 <div class="page" id="page-ach-ieee"><div class="detail-page">
   <div class="ach-hero-section"><div class="breadcrumb">Achievements / <em>IEEE InC4 2026</em></div><span class="ach-big-icon">📄</span><div class="detail-title">IEEE InC4 2026<br/>Research Paper Submission</div><div style="font-size:.9rem;color:var(--muted);margin-top:.4rem;">Submitted May 17, 2026</div></div>
   <div class="detail-body">
-    <div class="media-holder"><img src="cert_ieee.png" onerror="this.style.display='none'"><div class="media-holder-icon">📄</div><div class="media-holder-label">cert_ieee.png</div></div>
+    <div class="media-holder"><img src="cert_ieee.png" onerror="this.style.display='none'"><div class="media-holder-ph"><div class="media-holder-icon">📄</div><div class="media-holder-label">cert_ieee.png</div></div></div>
     <h3>Paper details</h3>
     <p><strong>Title:</strong> "Secure AI-Powered EEG-Based Brain-Computer Interface For Speech Imagery Communication"</p>
     <p><strong>Conference:</strong> 2026 IEEE International Conference on Contemporary Computing and Communications (InC4)</p>
